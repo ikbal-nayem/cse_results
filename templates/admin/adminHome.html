@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block navbar %}
+{% include "admin/admin_nav.html" %}
+{% endblock navbar %}
+{% block body %}
+
+{% if name %}
+<h1>{{ name }},</h1>
+{% endif %}
+<h4>Welcome to the admin panel. nice to see you again.</h4>
+
+
+{% endblock %}

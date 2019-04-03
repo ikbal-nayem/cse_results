@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block navbar %}
+{% include "includes/_navbar.html" %}
+{% endblock navbar %}
+
+{% block body %}
+<!-- <div class="container"> -->
+<div class="jumbotron">
+    <h1 class="display-4">Result</h1>
+    <p>Only for department of CSE Tejgaon college,Dhaka-123</p>
+    <hr class="my-4">
+    <form class="form-group" method="post" action="">
+        <div class="form-group has-success input1">
+            <label class="form-control-label" for="inputSuccess1">Registration no.</label>
+            <input type="text" required placeholder="Registration No..." class="form-control is-valid" name="regiInput" autofocus>
+            <div class="valid-feedback">Write your registration number here.</div>
+        </div>
+        <div class="input1">
+            <label class="form-control-label">Select semester</label>
+            <select class="custom-select" name="select" required>
+                <option value="">Choose...</option>
+                <option value="1st">1st</option>
+                <option value="2nd">2nd</option>
+                <option value="3rd">3rd</option>
+                <option value="4th">4th</option>
+                <option value="5th">5th</option>
+                <option value="6th">6th</option>
+                <option value="7th">7th</option>
+                <option value="8th">8th</option>
+            </select>
+            <small>Choose your semester</small>
+        </div>
+        <button type="submit" class="btn btn-outline-info btn-lg btn-block">See result</button>
+    </form>
+</div>
+<!-- </div> -->
+
+<script>
+
+</script>
+
+{% endblock body %}

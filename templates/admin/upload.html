@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block navbar %}
+{% include "admin/admin_nav.html" %}
+{% endblock navbar %}
+{% block body %}
+<div class="card text-white bg-dark mb-4" style="max-width: 100%;">
+    <h2 class="card-header">Upload a result sheet</h2>
+    <div class="card-body">
+        <p class="text-muted">To upload a new result sheet to the database you have to fill all fields and the file must be in (.txt) format.</p>
+        <hr>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <div class="form-group">
+                    <div class="form-group input1">
+                        <label class="form-control-label">Select semester *</label>
+                        <select class="custom-select" name="select" required>
+                            <option value="">Choose...</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                        </select>
+                        <small class="form-text text-muted">Choose a semester to upload in database</small>
+                    </div>
+                    <div class="input1">
+                        <label class="form-control-label">Examination year *</label>
+                        <input type="text" required placeholder="Year" class="form-control" name="year" autofocus>
+                        <small class="form-text text-muted">Write Examination year that you are uploading</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                        <input type="file" name="inputFile" class="custom-file-input" id="inputFile" onchange="fileName()" required>
+                        <label class="custom-file-label" for="inputGroupFile02">Choose a .txt file</label>
+                        </div>
+                        <div class="input-group-append">
+                        <span class="input-group-text" id="viewFileName"></span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="progress" id="progressBar" style="visibility:hidden;">
+                <em>Uploading file into database...</em><br>
+                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+            <i id="btnHelp"><small>After clicking <stron>Upload now</stron> button, all results and student information will be upload into the database automatically.</small></i>
+            <button type="submit" id="btn" onclick="progressBar()" class="btn btn-warning btn-block">Upload now</button>
+        </form>
+    </div>
+</div>
+
+<script>
+fileName = function(){
+    var n = document.getElementById('inputFile').files[0].name
+    document.getElementById('viewFileName').innerHTML = n
+}
+progressBar = function(){
+    document.getElementById('progressBar').style.visibility = 'visible'
+    document.getElementById('btnHelp').style.visibility = 'hidden'
+    document.getElementById('btn').classList.add("disabled")
+}
+</script>
+{% endblock body %}

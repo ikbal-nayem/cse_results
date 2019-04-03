@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+{% block navbar %}
+{% include "includes/_navbar.html" %}
+{% endblock navbar %}
+{% block body %}
+<script>
+window.onload = function(){
+    document.getElementById('result').style.color = 'red'
+}
+</script>
+<div class="card border-info mb-3" style="max-width: 100%;">
+    <h3 class="card-header card-title">Student information</h3>
+    <div class="card-body">
+        <table width="100%" border="0" cellpadding="3" cellspacing="1">
+            <tbody>
+            <tr>
+                <td width="20%" align="left">Name<div class="colon">:</div></td>
+                <td width="40%" align="left">{{ info['name'] }}</td>
+                <td width="20%" align="left">Registration No<div class="colon">:</div></td>
+                <td width="20%" align="left">{{ info['registration'] }}</td>
+            </tr>
+            <tr>
+                <td align="left">Batch<div class="colon">:</div></td>
+                <td align="left">{{ info['batch'] }}</td>
+                <td align="left">Session<div class="colon">:</div></td>
+                <td align="left">{{ info['session'] }}</td>
+            </tr>
+            <tr>
+                <td align="left">Institute<div class="colon">:</div></td>
+                <td align="left">Tejgaon College, Dhaka-123</td>
+                <td align="left">Semester<div class="colon">:</div></td>
+                <td align="left">{{ info['semester'] }}</td>
+            </tr>
+            <tr>
+                <td align="left">Result<div class="colon">:</div></td>
+            {% if info['result']=='FAILED' %}
+                <td align="left"><strong class="text-warning">{{ info['result'] }}</strong></td>
+            {% else %}
+                <td align="left"><strong id="result" class="text-success">{{ info['result'] }}</strong></td>
+            {% endif %}
+                <td align="left">Exam year<div class="colon">:</div></td>
+                <td align="left">{{ info['exam year'] }}</td>
+            <tr>
+                <td align="left">CGPA<div class="colon">:</div></td>
+                <td align="left"><strong class="text-success">{{ info['cgpa'] }}</strong></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div>
+    <h3 class="card-title">Grade sheet for {{ info['semester'] }} Semester </h3>
+    <hr class="my-2">
+{% if info['exception'] == 'student_not_found' %}
+    <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading">Oops!</h4>
+        <hr class="my-2">
+        <p class="mb-0">Somthing was wrong. We did not find any student with this '{{ info['registration'] }}' registration number. <a href="{{url_for('home')}}" class="alert-link">Search again</a>.</p>
+    </div>
+{% else %}
+    {% if info['exception'] == 'result_not_published_yet' %}
+    <div class="alert alert-dismissible alert-warning">
+        <h4 class="alert-heading">Warning!</h4>
+        <hr class="my-2">
+        <p class="mb-0">Your {{ info['semester'] }} semester result is not publish yet, <a href="{{url_for('home')}}" class="alert-link">go back to home</a>.</p>
+    </div>
+    {% endif %}
+    <table class="table">
+        <thead>
+            <tr class="table-active">
+                <th width="20%" scope="col" class="t_col">Codes</th>
+                <th width="65%" scope="col" class="t_col">Subjects</th>
+                <th width="15%" scope="col" class="t_col">Grades</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for i, course in enumerate(info['courses']) %}
+            <tr>
+                <td scope="row" class="t_col">{{ course[0] }}</td>
+                <td class="t_col">{{ course[1] }}</td>
+                <td class="t_col">{{ info['grades'][course[0]] }}</td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td class="t_col" scope="row"></td>
+                <td class="t_col text-warning">Total CGPA</td>
+                <td class="t_col text-warning"><strong>{{ info['cgpa'] }}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+<hr class="my-3">
+    <a href="{{url_for('home')}}" class="card-link"><button type="button" class="btn btn-outline-info btn-block">Go back home</button></a>
+<hr class="my-3">
+</div>
+
+<style>
+.card-title{
+    color: rgb(74, 173, 240);
+    text-align: center;
+}.colon{
+    float: right;
+    overflow: hidden;
+    color: #a8f551;
+}.table td, .table th{
+    padding: 5px;
+}
+</style>
+{% endblock body %}
