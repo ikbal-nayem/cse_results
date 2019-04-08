@@ -1,10 +1,11 @@
 # from flask_mysqldb import MySQL
 import pymysql
+from config import db_info
 
 class database:
 	def __init__(self):
-		# self.mysql = pymysql.connect(host='sql12.freesqldatabase.com', db='sql12286894', user='sql12286894', passwd='svtsG16M6e')
-		self.mysql = pymysql.connect(host='localhost', db='test', user='iku', passwd='welcome')
+		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
+		# self.mysql = pymysql.connect(host='localhost', db='results', user='iku', passwd='welcome')
 		self.c = self.mysql.cursor()
 	
 
@@ -54,7 +55,7 @@ class database:
 	def insert_student(self, reg_no, name, batch, session):
 		'''This function will add a new student information to student_info table if not exists'''
 
-		self.c.execute('select reg_no from student_info where reg_no="{}"'.format(str(reg_no)))
+		self.c.execute("select reg_no from student_info where reg_no='{}'".format(str(reg_no)))
 		if not self.c.fetchall():
 			q = "insert into student_info values('{}','{}',{},'{}')".format(str(reg_no), str(name), int(batch), str(session))
 			self.c.execute(q)
@@ -87,40 +88,39 @@ class database:
 
 	
 
-class table:
+class table(database):
 	'''Creating all tables and upload all information into course table'''
-
-	def __init__(self):
-		# self.mysql = pymysql.connect(host='sql12.freesqldatabase.com', db='sql12286894', user='sql12286894', passwd='svtsG16M6e')
-		self.mysql = pymysql.connect(host='localhost', db='test', user='iku', passwd='welcome')
-		self.c = self.mysql.cursor()
 
 	def create_tables(self, clist1, clist2):
 		'''This method will take 2 course list ( old and new) and create all requres tables for the database'''
 
-		course1 = 'create table course(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
-		course2 = 'create table course_new(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
-		student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(40), batch int(2), session varchar(7))'
-		self.c.execute(course1)
-		self.c.execute(course2)
-		print('course table ready..')
-		print('uploading into course table...', end=' ')
-		self.insert_course(clist1, clist2)
-		print("done")
-		print("creating student_info..")
-		self.c.execute(student_info)
-		self.mysql.commit()
-		print('creating semester tables...')
-		self.create_semester_table()
-		print('done')
-		self.mysql.commit()
+		try:
+			course1 = 'create table course(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
+			course2 = 'create table course_new(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
+			student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(40), batch int(2), session varchar(7))'
+			self.c.execute(course1)
+			self.c.execute(course2)
+			print('course table ready..')
+			print('uploading into course table...', end=' ')
+			self.insert_course(clist1, clist2)
+			print("done")
+			print("creating student_info..")
+			self.c.execute(student_info)
+			self.mysql.commit()
+			print('creating semester tables...')
+			self.create_semester_table()
+			print('done')
+			self.mysql.commit()
+			return True
+		except Exception as e:
+			return str(e.args[0])
 
 	def create_semester_table(self):
 		'''create all tables for 8 semesters'''
 
 		semeList = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th']
 		for seme in semeList:
-			courseList = '(select code from course where semester="{}") union (select code from course_new where semester="{}")'.format(seme,seme)
+			courseList = "(select code from course where semester='{}') union (select code from course_new where semester='{}')".format(seme,seme)
 			self.c.execute(courseList)
 			courseList = [l[0] for l in self.c.fetchall()]
 			q = "create table {}_semester(reg_no varchar(12) primary key, ".format(seme)+' varchar(2), '.join(courseList)+" varchar(2), year varchar(4))"

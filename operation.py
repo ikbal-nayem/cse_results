@@ -54,7 +54,7 @@ class backend:
                 co[i] = c.strip()
             if len(co)>1:
                 courseList2.append(co)
-        self.table.create_tables(courseList1, courseList2)
+        return self.table.create_tables(courseList1, courseList2)
     
 
     def upload_results(self, filename, semester, year):

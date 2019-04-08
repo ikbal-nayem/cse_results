@@ -16,11 +16,11 @@ def home():
     if request.method=='POST':
         reg_no = request.form['regiInput']
         semester = request.form.get('select')
-        # try:
-        json = backend().generate_API(reg_no, semester)
-        return render_template("result.html", title='Result', info=json)
-        # except Exception as e:
-        #     return str(e)
+        try:
+            json = backend().generate_API(reg_no, semester)
+            return render_template("result.html", title='Result', info=json)
+        except Exception as e:
+            return str(e)
     return render_template('home.html', title="CSE")
 
 @app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
@@ -34,9 +34,10 @@ def login():
     session.pop('user', None)
     if request.method == 'POST':
         res = admin().login(request.form['email'], request.form['passwd'])
+        # res = True
         if res==True:
             session['user'] = request.form['email'].strip('@')[0]
-            return redirect(url_for('admin_panel'))
+            return redirect(url_for('admin_panel', name=session['user']))
         else:
             return jsonify(res)
     return render_template('admin/login.html', title='Admin-login')
@@ -69,11 +70,14 @@ def create_tables():
     if 'user' in session:
         if request.method == "POST":
             return backend().create_tables_in_database()
-        return render_template('admin/create_table.html', title='Admmin-Create tables')
+        return render_template('admin/create_table.html', title='Admin- Create-tables')
     return redirect('login')
-
 
 
 
 if __name__=="__main__":
     app.run(host='localhost', port=8080, debug=True)
+
+
+
+# 4321 4900 1235 6512
