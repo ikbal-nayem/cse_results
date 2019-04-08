@@ -3,7 +3,7 @@ import pymysql
 
 class database:
 	def __init__(self):
-		# self.mysql = pymysql.connect(host='sql12.freesqldatabase.com', db='sql12284684', user='sql12284684', passwd='g4smdBelKh')
+		# self.mysql = pymysql.connect(host='sql12.freesqldatabase.com', db='sql12286894', user='sql12286894', passwd='svtsG16M6e')
 		self.mysql = pymysql.connect(host='localhost', db='test', user='iku', passwd='welcome')
 		self.c = self.mysql.cursor()
 	
@@ -48,9 +48,7 @@ class database:
 		q = "select "+','.join(codes)+", year from {}_semester where reg_no='{}'".format(semester, reg_no)
 		self.c.execute(q)
 		res = self.c.fetchall()
-		if res:
-			return self.c.fetchall()[0]
-		return None
+		return res[0] if res else None
 
 
 	def insert_student(self, reg_no, name, batch, session):
@@ -93,6 +91,7 @@ class table:
 	'''Creating all tables and upload all information into course table'''
 
 	def __init__(self):
+		# self.mysql = pymysql.connect(host='sql12.freesqldatabase.com', db='sql12286894', user='sql12286894', passwd='svtsG16M6e')
 		self.mysql = pymysql.connect(host='localhost', db='test', user='iku', passwd='welcome')
 		self.c = self.mysql.cursor()
 

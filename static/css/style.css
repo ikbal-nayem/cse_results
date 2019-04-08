@@ -1,4 +1,4 @@
-.container1{
+.container{
     width: 700px;
     min-width: 310px;
     max-width: 700px;
@@ -21,4 +21,7 @@
     color: #a8f551;
 }.table td, .table th{
     padding: 5px;
+}.hidden-msg{
+    visibility: hidden;
+    display: none;
 }

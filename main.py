@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from operation import backend
+from adminPanel import admin
 import os
 
 app = Flask(__name__)
@@ -15,11 +16,11 @@ def home():
     if request.method=='POST':
         reg_no = request.form['regiInput']
         semester = request.form.get('select')
-        try:
-            json = backend().generate_API(reg_no, semester)
-            return render_template("result.html", title='Result', info=json)
-        except Exception as e:
-            return str(e)
+        # try:
+        json = backend().generate_API(reg_no, semester)
+        return render_template("result.html", title='Result', info=json)
+        # except Exception as e:
+        #     return str(e)
     return render_template('home.html', title="CSE")
 
 @app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
@@ -32,21 +33,21 @@ def api(reg_no, semester):
 def login():
     session.pop('user', None)
     if request.method == 'POST':
-        if backend().admin_check(request.form['email'], request.form['passwd']):
-            session['user'] = request.form['email'].strip()[0]
-            return redirect(url_for('admin', name=request.form['email'].split('@')[0]))
+        res = admin().login(request.form['email'], request.form['passwd'])
+        if res==True:
+            session['user'] = request.form['email'].strip('@')[0]
+            return redirect(url_for('admin_panel'))
         else:
-            return render_template('admin/login.html', title='Admin-login', tried=True)
+            return jsonify(res)
     return render_template('admin/login.html', title='Admin-login')
 
-# from adminRoutes import *
-@app.route('/admin/<name>')
-@app.route('/admin/', defaults={'name':None})
-def admin(name):
-    if 'user' in session:
-        return render_template('admin/adminHome.html', title='Admin', name=name)
-    else:
-        return redirect('login')
+
+@app.route('/admin-panel')
+def admin_panel():
+    if 'user' in session: 
+        return render_template('admin/adminHome.html', title='Admin')
+    else: 
+        return redirect('login')  
 
 
 @app.route('/admin/upload', methods=['GET', 'POST'])
@@ -62,6 +63,14 @@ def uploadTXT():
     else:
         return redirect('login')
 
+
+@app.route('/admin/create-tables', methods=['POST', 'GET'])
+def create_tables():
+    if 'user' in session:
+        if request.method == "POST":
+            return backend().create_tables_in_database()
+        return render_template('admin/create_table.html', title='Admmin-Create tables')
+    return redirect('login')
 
 
 

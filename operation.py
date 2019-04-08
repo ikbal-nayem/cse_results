@@ -1,4 +1,5 @@
 from db_operation import database, table
+from flask import jsonify
 import calculator
 import os
 
@@ -33,8 +34,8 @@ class backend:
     def create_tables_in_database(self):
         '''This mathod will pass 2 lists to database operetion class to create all tables into the database'''
 
-        file1 = '/root/Program/py/flask/src/CSE_results/files/courselist1.txt'          #put the .txt files location of course
-        file2 = '/root/Program/py/flask/src/CSE_results/files/courselist2.txt'          #put the .txt files location of course
+        file1 = 'static/course_files/courselist1.txt'          #put the .txt files location of course
+        file2 = 'static/course_files/courselist2.txt'          #put the .txt files location of course
         courseList1 = []
         courseList2 = []
         with open(file1, 'r') as f1:
@@ -54,7 +55,6 @@ class backend:
             if len(co)>1:
                 courseList2.append(co)
         self.table.create_tables(courseList1, courseList2)
-        return "database is ready to use."
     
 
     def upload_results(self, filename, semester, year):
@@ -108,7 +108,7 @@ class backend:
             'cgpa': cgpa,
             'exam year': res[-1],
         }
-        return json
+        return jsonify(json)
 
     
 

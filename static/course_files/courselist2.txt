@@ -1,0 +1,90 @@
+_510201  |   Structured Programming Language |   3.0  |   1st
+_510202  |   Structured Programming Language Lab |   1.5 |   1st
+_510203  |   Electrical and Electronic Circuit   |   3.0  |   1st
+_510204  |   Electrical and Electronic Circuit Lab   |   1.5  |   1st
+_510205  |   Calculus    |   3.0  |   1st
+_510206  |   Physics |   3.0  |   1st
+_510207  |   English |   3.0  |   1st
+
+_510208  |   Digital Systems Design |   3.0  |   2nd
+_510209  |   Digital Systems Lab |   1.5  |   2nd
+_510210  |   Discrete Mathematics |   3.0  |   2nd
+_510211  |   Linear Algebra |   3.0  |   2nd
+_510212  |   Statistics and Probability |   3.0  |   2nd
+_510213  |   History of the Emergence of Independent Bangladesh |   3.0  |   2nd
+
+_520201  |   Data Structure |   3.0  |   3rd
+_520202  |   Data Structure Lab |   1.5  |   3rd
+_520203  |   Object Oriented Programming |   3.0  |   3rd
+_520204  |   Object Oriented Programming Lab |   1.5  |   3rd
+_520205  |   Computer Architecture |   3.0  |   3rd
+_520206  |   Ordinary Differential Equation |   3.0  |   3rd
+_520207  |   Fundamental of Business Studies |   3.0  |   3rd
+
+_520208  |   Database Management System |   3.0  |   4th
+_520209  |   Database Management System Lab |   1.5  |   4th
+_520210  |   Microprocessor and Assembly Language |   3.0  |   4th
+_520211  |   Microprocessor and Assembly Language Lab |   1.5  |   4th
+_520212  |   Design and Analysis of Algorithms |   3.0  |   4th
+_520213  |   Design and Analysis of Algorithms Lab |   1.5  |   4th
+_520214  |   Numerical Analysis |   3.0  |   4th
+
+_530201  |   Peripheral and Interfacing |   3.0  |   5th
+_530202  |   Peripheral and Interfacing Lab |   1.5  |   5th
+_530203  |   Data and Telecommunications |   3.0  |   5th
+_530204  |   Data and Telecommunications Lab |   1.5  |   5th
+_530205  |   Operating System |   3.0  |   5th
+_530206  |   Operating System Lab |   1.5  |   5th
+_530207  |   Economics |   3.0  |   5th
+
+_530208  |   Software Engineering |   3.0  |   6th
+_530209  |   Software Engineering Lab |   1.5  |   6th
+_530210  |   Computer Networking |   3.0  |   6th
+_530211  |   Computer Networking Lab |   1.5  |   6th
+_530212  |   Embedded System Programming |   3.0  |   6th
+_530213  |   Embedded System Programming Lab |   1.5  |   6th
+_530214  |   Theory of Computation |   3.0  |   6th
+
+_540201  |   Artificial Intelligence |   3.0  |   7th
+_540202  |   Artificial Intelligence Lab |   1.5  |   7th
+_540203  |   Compiler Design and Construction |   3.0  |   7th
+_540204  |   Compiler Design Lab |   1.5  |   7th
+_540205  |   Computer Graphics |   3.0  |   7th
+_540206  |   Computer Graphics Lab |   1.5  |   7th
+_540207  |   E-Commerce and Web Engineering |   3.0  |   7th
+_540208  |   E-Commerce and Web Engineering Lab |   1.5  |   7th
+
+_540209  |   Network and Information Security |   3.0 |   8th
+_540210  |   Network and Information Security Lab  |   1.5 |   8th
+_540211  |   Information System Management |   3.0 |   8th
+_540240  |   Project/Industry Attachment |   6.0 |   8th
+
+_540212  |    Simulation and Modeling |   3.0 |   8th
+_540214  |    Parallel and Distributed Systems |   3.0 |   8th
+_540216  |    Digital Signal Processing |   3.0 |   8th
+_540218  |    Digital Image Processing |   3.0 |   8th
+_540220  |    Multimedia |   3.0 |   8th
+_540222  |    Pattern Recognition |   3.0 |   8th
+_540224  |    Design and Analysis of VLSI Systems |   3.0 |   8th
+_540226  |    Micro-controller and Embedded System |   3.0 |   8th
+_540228  |    Cyber Law and Computer Forensic |   3.0 |   8th
+_540230  |    Natural Language Processing |   3.0 |   8th
+_540232  |    System Analysis and Design |   3.0 |   8th
+_540234  |    Optical Fiber Communication |   3.0 |   8th
+_540236  |    Human Computer Interaction |   3.0 |   8th
+_540238  |    Graph Theory |   3.0 |   8th
+
+_540213   |    Simulation and Modeling Lab |   3.0 |   8th
+_540215   |    Parallel and Distributed Systems Lab |   3.0 |   8th
+_540217   |    Digital Signal Processing Lab |   3.0 |   8th
+_540219   |    Digital Image Processing Lab |   3.0 |   8th
+_540221   |    Multimedia Lab |   3.0 |   8th
+_245023   |    Pattern Recognition Lab |   3.0 |   8th
+_540225   |    Design and Testing of VLSI Systems Lab |   3.0 |   8th
+_540227   |    Micro-controller and Embedded System Lab |   3.0 |   8th
+_540229   |    Cyber Law and Computer Forensics Lab |   3.0 |   8th
+_540231   |    Natural Language Processing Lab |   3.0 |   8th
+_540233   |    System Analysis and Design Lab |   3.0 |   8th
+_540235   |    Optical Fiber Communication Lab |   3.0 |   8th
+_540237   |    Human Computer Interaction Lab |   3.0 |   8th
+_540239   |    Graph Theory Lab |   3.0 |   8th

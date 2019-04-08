@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% include "admin/admin_nav.html" %}
+{% block body %}
+
+<p>By clicking the create button bellow, all tables will be create into the database automatically.</p>
+<div class="hidden-msg">
+    <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Tables are created successfully!</strong>
+    </div>
+</div>
+<button type="submit" id="createTables" class="btn btn-warning btn-sm">Create tables</button>
+
+{% endblock %}

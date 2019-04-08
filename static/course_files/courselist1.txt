@@ -1,0 +1,62 @@
+CSE_111	|	Introduction_to_Computer_System	|	3.0	|	1st
+CSE_112	|	Programming_Language	|	3.0	|	1st
+CSE_113	|	Programming_Language_Practical	|	1.5	|	1st
+CSE_114	|	Physics_Electricity_and_magnetism	|	3.0	|	1st
+CSE_115	|	Differential_Calculus	|	3.0	|	1st
+GED_116	|	English	|	3.0 |	1st
+
+CSE_121	|	Data_Structure	|	3.0	|	2nd
+CSE_122	|	Data_Structure_Practical	|	1.5	|	2nd
+CSE_123	|	Introduction_to_Electrical_Engineering	|	3.0	|	2nd
+CSE_124	|	Introduction_to_Electrical_Engineering_Practical	|	1.5	|	2nd
+CSE_125	|	Integral_Calculus_and_Differential_Equation	|	3.0	|	2nd
+CSE_126	|	Statistics_and_Probability	|	3.0	|	2nd
+CSE_127	|	Discrete_Mathematics	|	3.0	|	2nd
+
+CSE_211	|	Object_Oriented_Programming	|	3.0	|	3rd
+CSE_212	|	OOP_Practical	|	1.5	|	3rd
+CSE_213	|	Operating_System	|	3.0	|	3rd
+CSE_214	|	Digital_Logic_Design	|	3.0	|	3rd
+CSE_215	|	Digital_Logic_Design_practical	|	1.5	|	3rd
+CSE_216	|	Mathematics_for_CSE	|	3.0	|	3rd
+CSE_217	|	Electronic_Devices_and_Circuits	|	3.0	|	3rd
+CSE_218	|	Electronic_Devices_and_Circuits_practical	|	1.5 |	3rd
+CSE_219	|	Basic_Accounting	|	3.0	|	3rd
+
+CSE_221	|	Algorithm_Design	|	3.0	|	4th
+CSE_222	|	Algorithm_Design_practical	|	1.5	|	4th
+CSE_223	|	Database_Management_System	|	3.0	|	4th
+CSE_224	|	Database_Management_System_practical	|	1.5	|	4th
+CSE_225	|	Computer_Organiztion_and_Architecture	|	3.0	|	4th
+CSE_226	|	Data_Communications	|	3.0	|	4th
+CSE_227	|	Economics	|	3.0	|	4th
+
+CSE_311	|	Theory_of_Computation	|	3.0	|	5th
+CSE_312	|	Microprocessor_and_Assembly_language	|	3.0	|	5th
+CSE_313	|	Assembly_language_Practical	|	1.5	|	5th
+CSE_314	|	Engineering_Mathematics	|	3.0	|	5th
+CSE_315	|	Sociology	|	3.0	|	5th
+CSE_316	|	Technical_Writing_and_Communications	|	3.0	|	5th
+
+CSE_321	|	Software_Engineering	|	3.0	|	6th
+CSE_322	|	Software_Engineering_practical	|	1.5	|	6th
+CSE_323	|	Numerical_Analysis	|	3.0	|	6th
+CSE_324	|	Computer_Graphics_and_Multimedia	|	3.0	|	6th
+CSE_325	|	Computer_Graphics_and_Multimedia_practical	|	1.5	|	6th
+CSE_326	|	Compiler_Design	|	3.0	|	6th
+CSE_327	|	Compiler_Design_practical	|	1.5	|	6th
+CSE_328	|	System_Analysis_&_Design	|	3.0	|	6th
+
+CSE_411	|	Computer_Networking	|	3.0	|	7th
+CSE_412	|	Computer_Networking_Practical	|	1.5	|	7th
+CSE_413	|	Artificial_Intelligence_and_Neural_Network	|	3.0	|	7th
+CSE_414	|	Practical_and_Distributed_Processing	|	3.0	|	7th
+CSE_415	|	Peripheral_and_Interfacing	|	3.0	|	7th
+CSE_416	|	Peripheral_and_Interfacing_Practical	|	1.0	|	7th
+CSE_417	|	Digital_Signal_Processing	|	3.0	|	7th
+
+CSE_421	|	Web_Engineering	|	3.0	|	8th
+CSE_422	|	Web_Engineering_Practical	|	1.5	|	8th
+CSE_423	|	Computer_and_Network_Security	|	3.0	|	8th
+CSE_42X	|	Electrive_Course	|	3.0	|	8th
+CSE_4995|	Project	|	6.0	|	8th

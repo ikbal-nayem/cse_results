@@ -3,28 +3,42 @@
 {% include "includes/_navbar.html" %}
 {% endblock navbar %}
 {% block body %}
-<form action="" method="POST" class="login" style="margin:auto; width:55%"><br>
+<form id="loginForm" class="login" action="{{ url_for('login') }}" method="POST" style="margin:auto; width:55%"><br>
   <fieldset>
     <legend><h2>Admin Login</h2></legend>
     <hr class="my-2">
-  {% if tried %}
-    <div class="alert alert-dismissible alert-warning">
-        <p class="mb-0">Invalid email* or password*.</p>
-    </div>
-  {% endif %}
     <div class="form-group">
       <label for="exampleInputEmail1">Email address *</label>
-      <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" required autofocus>
+      <input type="email" id="loginEmail" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" autofocus>
+      <small id="invalidEmail"></small>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password *</label>
-      <input type="password" class="form-control" placeholder="Password" name="passwd" required>
+      <input type="password" id="loginPasswd" class="form-control" placeholder="Password" name="passwd">
+      <small id="invalidPasswd"></small>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <button type="submit" id="login" class="btn btn-primary btn-block">Login</button>
   </fieldset>
 </form>
+<div id="log"></div>
 
-<style type="text/css">
+<!-- <style type="text/css">
 
 </style>
+
+
+<script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDknVRA5s71ILA3aiFPYzrlKunQbGyXfDE",
+    authDomain: "cse-result.firebaseapp.com",
+    databaseURL: "https://cse-result.firebaseio.com",
+    projectId: "cse-result",
+    storageBucket: "cse-result.appspot.com",
+    messagingSenderId: "589177772091"
+  };
+  firebase.initializeApp(config);
+</script> -->
+
 {% endblock body %}
