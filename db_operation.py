@@ -1,10 +1,12 @@
 # from flask_mysqldb import MySQL
-import pymysql
+import pymysql, json
+# import psycopg2
 from config import db_info
 
 class database:
 	def __init__(self):
 		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
+		# self.mysql = psycopg2.connect(host=db_info.HOST, database=db_info.DATABASE, user=db_info.USER, password=db_info.PASSWORD)
 		# self.mysql = pymysql.connect(host='localhost', db='results', user='iku', passwd='welcome')
 		self.c = self.mysql.cursor()
 	
@@ -111,9 +113,10 @@ class table(database):
 			self.create_semester_table()
 			print('done')
 			self.mysql.commit()
-			return True
+			self.mysql.close()
+			return dict(exception=True)
 		except Exception as e:
-			return str(e.args[0])
+			return dict(exception=str(json.loads(e.args[0])))
 
 	def create_semester_table(self):
 		'''create all tables for 8 semesters'''

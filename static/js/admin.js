@@ -6,10 +6,12 @@ $(document).ready(function(){
             type: 'POST',
         });
         res.done(function(data){
-            if (data === '1050'){
+            if(data.exception === true){
+                $('.hidden-msg').css({'visibility': 'visible', 'display':'inline'})
+            }else if(data.exception === '1050'){
                 $('#tableCreated').html('Tables are already created!');
             }else{
-                $('.hidden-msg').css({'visibility': 'visible', 'display':'inline'});
+                $('#tableCreated').html('Something was wrong creating tables!<br>check your database connection.');
             }
         });
     });

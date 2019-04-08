@@ -12,7 +12,7 @@ progressBar = function(){
     document.getElementById('btn').classList.add("disabled")
 }
 
-function myFunction() {
+function drop() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
   
