@@ -23,11 +23,11 @@ $(document).ready(function(){
         })
         res.done(function(res){
             if(res.error){
-                if(res.error.message == "EMAIL_NOT_FOUND"){
-                    $('#invalidEmail').html('EMAIL NOT FOUND').css({'color': 'red'})
+                if(res.error.errors[0].message == "EMAIL_NOT_FOUND"){
+                    $('#invalidEmail').html('Email not found').css({'color': 'red'})
                     $('#invalidPasswd').css({'display': 'none'})
                 }
-                else if(res.error.message == "INVALID_PASSWORD"){
+                else if(res.error.errors[0].message == "INVALID_PASSWORD"){
                     $('#invalidEmail').css({'display': 'none'})
                     $('#invalidPasswd').html('Invalid Password').css({'color': 'red'})
                 }
