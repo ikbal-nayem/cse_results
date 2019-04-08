@@ -78,6 +78,3 @@ def create_tables():
 if __name__=="__main__":
     app.run(host='localhost', port=8080, debug=True)
 
-
-
-# 4321 4900 1235 6512

@@ -3,5 +3,4 @@ env
 __init__
 files
 __pycache__
-.gitignore
-
+config.py
