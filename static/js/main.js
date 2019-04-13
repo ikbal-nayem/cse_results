@@ -1,7 +1,3 @@
-// fileName = function(){
-//     var n = document.getElementById('inputFile').files[0].name
-//     document.getElementById('viewFileName').innerHTML = n
-// }
 fileName = function(){
     var n = document.getElementById('inputFile').files[0].name
     document.getElementById('viewFileName').innerHTML = n
@@ -24,3 +20,32 @@ window.onclick = function(e) {
         }
     }
 }
+
+$(document).ready(function(){
+    $('#navBar').on('click', function(){
+        if($(this).attr('aria-expanded')==='true'){
+            $(this).attr('aria-expanded', 'false')
+        }else{
+            $(this).attr('aria-expanded', 'true')
+        }
+        $(this).toggleClass('collapsed')
+        $('#navbarColor02').toggleClass('show')
+    })
+})
+
+$(document).ready(function(){
+    $('#resultInfo').on('submit', function(event){
+        if($(this).attr("success")){
+            return true
+        }
+        event.preventDefault()
+        var reg = $('#reg_no').val()
+        if(!$.isNumeric(reg)){
+            $('.alart').html("Invalid registration number.").addClass("error-alert")
+        }else{
+            $('.alart').removeClass("error-alert")
+            $('#resultInfo').attr("success", true)
+            $('#resultInfo').submit()
+        }
+    })
+})

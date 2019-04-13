@@ -1,13 +1,21 @@
-.container{
-    width: 700px;
+.navbar-brand h2{
+    margin: 0 50px 0 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: -5px;
+    text-shadow: -3px 5px 10px rgb(0, 0, 0);
+    color: rgb(181, 187, 192);
+}.container{
     min-width: 310px;
-    max-width: 700px;
+    max-width: 650px;
     margin-top: 8px;
 }.jumbotron{
+    margin: auto;
     padding-top: 15px;
 }.form-group{
     clear:both;
     overflow: hidden;
+}.input{
+    outline-color: green !important;
 }.input1{
     width: 49.5%;
     float: left;
@@ -24,6 +32,9 @@
 }.hidden-msg{
     visibility: hidden;
     display: none;
+}.error-alert{
+    color: red !important;
+    font-display: inherit;
 }
 
 .show {

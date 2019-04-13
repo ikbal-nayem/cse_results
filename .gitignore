@@ -3,4 +3,4 @@ env
 __init__
 files
 __pycache__
-config.py
+conf.py

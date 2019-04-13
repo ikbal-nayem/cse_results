@@ -2,20 +2,26 @@
 {% block navbar %}
 {% include "includes/_navbar.html" %}
 {% endblock navbar %}
-
 {% block body %}
 <div class="jumbotron">
     <h1 class="display-4">Result</h1>
-    <p>Only for department of CSE Tejgaon college,Dhaka-123</p>
+    <p>For CSE department Tejgaon college, Dhaka-123</p>
     <hr class="my-4">
-    <form class="form-group" method="post" action="">
-        <div class="form-group has-success input1">
-            <label class="form-control-label" for="inputSuccess1">Registration no.</label>
-            <input type="text" required placeholder="Registration No..." class="form-control is-valid" name="regiInput" autofocus>
-            <div class="valid-feedback">Write your registration number here.</div>
+    <p>
+        Now you will able to see your result by your <strong>registration number. </strong>
+        You just need to write your full registration number and then 
+        select your semester correctly. <br>
+        <strong>Good luck...</strong>
+    </p>
+    <br>
+    <form id="resultInfo" class="form-group" method="post" action="">
+        <div class="form-group input1">
+            <label class="form-control-label">Registration no.</label>
+            <input id="reg_no" type="text" required placeholder="Registration No..." class="form-control input" name="regiInput" autofocus>
+            <small class="alart">Write your registration number here.</small>
         </div>
         <div class="input1">
-            <label class="form-control-label">Select semester</label>
+            <label class="form-control-label">Semester</label>
             <select class="custom-select" name="select" required>
                 <option value="">Choose...</option>
                 <option value="1st">1st</option>
@@ -27,14 +33,9 @@
                 <option value="7th">7th</option>
                 <option value="8th">8th</option>
             </select>
-            <small>Choose your semester</small>
+            <small>Choose a semester</small>
         </div>
         <button type="submit" class="btn btn-outline-info btn-lg btn-block">See result</button>
     </form>
 </div>
-
-<script>
-
-</script>
-
 {% endblock body %}

@@ -34,8 +34,8 @@ class backend:
     def create_tables_in_database(self):
         '''This mathod will pass 2 lists to database operetion class to create all tables into the database'''
 
-        file1 = 'static/course_files/courselist1.txt'          #put the .txt files location of course
-        file2 = 'static/course_files/courselist2.txt'          #put the .txt files location of course
+        file1 = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/course_files/courselist1.txt')          #put the .txt files location of course
+        file2 = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static/course_files/courselist2.txt')          #put the .txt files location of course
         courseList1 = []
         courseList2 = []
         with open(file1, 'r') as f1:
@@ -60,7 +60,7 @@ class backend:
     def upload_results(self, filename, semester, year):
         '''This will take result (.txt) file and pass to the student_info and result table'''
 
-        file = os.path.join('upload', filename)
+        file = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'upload'), filename)
         li = self.txt2list(file)
         for l in li:
             reg_no, _, session, name, res = l[1], l[0], l[2], l[3], l[4:]
@@ -75,8 +75,7 @@ class backend:
         
         info = self.db.show_info(reg_no)
         if info == None:
-            json = {'exception': 'student_not_found','registration': '','name': '','batch': '','session': '','semester': '','result': '','cgpa': '',}
-            return json
+            return {'exception': 'student_not_found','registration': '','name': '','batch': '','session': '','semester': '','result': '','cgpa': '',}
         courses = list([list(course) for course in self.db.show_courses(semester, info[3])])
         credit = [cr[2] for cr in courses]
         res = self.db.show_result(reg_no, semester, info[3])
@@ -108,12 +107,6 @@ class backend:
             'cgpa': cgpa,
             'exam year': res[-1],
         }
-        return jsonify(json)
-
-    
+        return json
 
 
-# f = '/root/Program/py/flask/src/CSE_results/files/1st_semester_8b(2017).txt'
-# backend().upload_results(f, '1st', '2017')
-# backend().create_tables_in_database()
-# backend().generate_API('16502000667', '3rd')

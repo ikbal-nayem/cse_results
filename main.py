@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-app.config['FILES_UPLOAD'] = 'upload'
+app.config['FILES_UPLOAD'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'upload')
 
 @app.context_processor
 def example():
@@ -14,11 +14,9 @@ def example():
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method=='POST':
-        reg_no = request.form['regiInput']
-        semester = request.form.get('select')
         try:
-            json = backend().generate_API(reg_no, semester)
-            return render_template("result.html", title='Result', info=json)
+            js = backend().generate_API(request.form['regiInput'], request.form.get('select'))
+            return render_template("result.html", title='Result', info=js)
         except Exception as e:
             return str(e)
     return render_template('home.html', title="CSE")
@@ -34,12 +32,11 @@ def login():
     session.pop('user', None)
     if request.method == 'POST':
         res = admin().login(request.form['email'], request.form['passwd'])
-        # res = True
         if res==True:
             session['user'] = request.form['email'].strip('@')[0]
             return redirect(url_for('admin_panel', name=session['user']))
         else:
-            return jsonify(res)
+            return res
     return render_template('admin/login.html', title='Admin-login')
 
 
@@ -60,7 +57,8 @@ def uploadTXT():
             txt = request.files['inputFile']
             txt.save(os.path.join(app.config['FILES_UPLOAD'], txt.filename))          
             backend().upload_results(txt.filename, semester, year)
-        return render_template('admin/upload.html', title='Admin')
+            return jsonify({"success":True})
+        return render_template('admin/upload.html', title='Admin-Upload')
     else:
         return redirect('login')
 
@@ -69,7 +67,7 @@ def uploadTXT():
 def create_tables():
     if 'user' in session:
         if request.method == "POST":
-            return backend().create_tables_in_database()
+            backend().create_tables_in_database()
         return render_template('admin/create_table.html', title='Admin- Create-tables')
     return redirect('login')
 
@@ -77,4 +75,6 @@ def create_tables():
 
 if __name__=="__main__":
     app.run(host='localhost', port=8080, debug=True)
+
+
 

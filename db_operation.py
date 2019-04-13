@@ -1,13 +1,10 @@
-# from flask_mysqldb import MySQL
 import pymysql, json
-# import psycopg2
-from config import db_info
+from conf import db_info
 
 class database:
 	def __init__(self):
-		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
-		# self.mysql = psycopg2.connect(host=db_info.HOST, database=db_info.DATABASE, user=db_info.USER, password=db_info.PASSWORD)
-		# self.mysql = pymysql.connect(host='localhost', db='results', user='iku', passwd='welcome')
+		# self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
+		self.mysql = pymysql.connect(host='localhost', db='results', user='iku', passwd='welcome')
 		self.c = self.mysql.cursor()
 	
 
@@ -115,8 +112,9 @@ class table(database):
 			self.mysql.commit()
 			self.mysql.close()
 			return dict(exception=True)
-		except Exception as e:
-			return dict(exception=str(json.loads(e.args[0])))
+		except Exception:
+			pass
+			# return dict(exception=str(json.loads(e.args[0])))
 
 	def create_semester_table(self):
 		'''create all tables for 8 semesters'''
@@ -142,13 +140,3 @@ class table(database):
 			self.c.execute(q)
 		self.mysql.commit()
 
-
-
-# database().show_result('16502000664', '4th', '2016-17')
-# s = database().show_courses('3rd')
-# i = database().show_info('16502000667')
-# database().insert_student('16502000663', 'iku', 8, 'zzf')
-# database().insert_result('1st', '2017-18')
-# print(s)
-# print(g)
-# print(i)
