@@ -35,6 +35,10 @@
 }.error-alert{
     color: red !important;
     font-display: inherit;
+}.success{
+    text-align: center;
+    color: yellowgreen;
+    display: none;
 }
 
 .show {

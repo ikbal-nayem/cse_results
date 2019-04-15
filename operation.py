@@ -75,7 +75,7 @@ class backend:
         
         info = self.db.show_info(reg_no)
         if info == None:
-            return {'exception': 'student_not_found','registration': '','name': '','batch': '','session': '','semester': '','result': '','cgpa': '',}
+            return {'exception': 'student_not_found','registration': reg_no,'name': '','batch': '','session': '','semester': '','result': '','cgpa': '',}
         courses = list([list(course) for course in self.db.show_courses(semester, info[3])])
         credit = [cr[2] for cr in courses]
         res = self.db.show_result(reg_no, semester, info[3])

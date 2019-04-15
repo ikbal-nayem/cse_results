@@ -1,25 +1,4 @@
-fileName = function(){
-    var n = document.getElementById('inputFile').files[0].name
-    document.getElementById('viewFileName').innerHTML = n
-}
-progressBar = function(){
-    document.getElementById('progressBar').style.visibility = 'visible'
-    document.getElementById('btnHelp').style.visibility = 'hidden'
-    document.getElementById('btn').classList.add("disabled")
-}
-
-function drop() {
-    document.getElementById("myDropdown").classList.toggle("show");
-}
-  
-window.onclick = function(e) {
-    if (!e.target.matches('.dropdown-toggle')) {
-    var myDropdown = document.getElementById("myDropdown");
-        if (myDropdown.classList.contains('show')) {
-        myDropdown.classList.remove('show');
-        }
-    }
-}
+//                                  navbar expend
 
 $(document).ready(function(){
     $('#navBar').on('click', function(){
@@ -32,6 +11,8 @@ $(document).ready(function(){
         $('#navbarColor02').toggleClass('show')
     })
 })
+
+//                          check registration number
 
 $(document).ready(function(){
     $('#resultInfo').on('submit', function(event){
@@ -46,6 +27,39 @@ $(document).ready(function(){
             $('.alart').removeClass("error-alert")
             $('#resultInfo').attr("success", true)
             $('#resultInfo').submit()
+        }
+    })
+})
+
+//                                  login check  
+
+$(document).ready(function(){
+    $('#loginForm').on('submit', function(event){
+        if($(this).attr("success")){
+            return true
+        }else{
+            event.preventDefault()
+            res = $.ajax({
+                url: '/login',
+                type: 'POST',
+                data: {'email':$('#loginEmail').val(), 'passwd': $('#loginPasswd').val()}
+            })
+            res.done(function(resp){
+                if(resp.error){
+                    if(resp.error.errors[0].message === "EMAIL_NOT_FOUND"){
+                        $('#invalidEmail').html('Email not found').css({'color': 'red'})
+                        $('#invalidPasswd').css({'display': 'none'})
+                    }else if(resp.error.errors[0].message === "INVALID_PASSWORD"){
+                        $('#invalidEmail').css({'display': 'none'})
+                        $('#invalidPasswd').html('Invalid Password').css({'color': 'red'})
+                    }
+                }else{
+                    $('#invalidEmail').css({'display': 'none'})
+                    $('#invalidPasswd').css({'display': 'none'})
+                    $("#loginForm").attr("success",true);
+                    $("#loginForm").submit()
+                }
+            })
         }
     })
 })

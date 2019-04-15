@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from operation import backend
 from adminPanel import admin
-import os
+import os, time
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -19,7 +19,7 @@ def home():
             return render_template("result.html", title='Result', info=js)
         except Exception as e:
             return str(e)
-    return render_template('home.html', title="CSE")
+    return render_template('home.html')
 
 @app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
 def api(reg_no, semester):
@@ -33,7 +33,7 @@ def login():
     if request.method == 'POST':
         res = admin().login(request.form['email'], request.form['passwd'])
         if res==True:
-            session['user'] = request.form['email'].strip('@')[0]
+            session['user'] = request.form['email'].split('@')[0]
             return redirect(url_for('admin_panel', name=session['user']))
         else:
             return res
@@ -55,7 +55,7 @@ def uploadTXT():
             semester = request.form.get('select')
             year = request.form['year']
             txt = request.files['inputFile']
-            txt.save(os.path.join(app.config['FILES_UPLOAD'], txt.filename))          
+            txt.save(os.path.join(app.config['FILES_UPLOAD'], txt.filename))     
             backend().upload_results(txt.filename, semester, year)
             return jsonify({"success":True})
         return render_template('admin/upload.html', title='Admin-Upload')

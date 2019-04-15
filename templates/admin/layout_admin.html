@@ -4,20 +4,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 {% if title %}
-    <title>CSE-{{title}}</title>
-{% else %}
-    <title>CSE</title>
+    <title>{{title}}</title>
 {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="{{ url_for('static', filename='icon/tc.png') }}" sizes="15x15">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </head>
 <body>
     <header>
-    {% include "includes/_navbar.html" %}
+    {% block navbar %}{% endblock navbar %}
     </header>
 <div class="container">
 {% block body %}

@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "admin/layout_admin.html" %}
 {% block navbar %}
 {% include "admin/admin_nav.html" %}
 {% endblock navbar %}
@@ -6,7 +6,13 @@
 <div class="card text-white bg-dark mb-4" style="max-width: 100%;">
     <h2 class="card-header">Upload a result sheet</h2>
     <div class="card-body">
-        <p class="text-muted">To upload a new result sheet to the database you have to fill all fields and the file must be in (.txt) format.</p>
+        <p class="text-muted">
+            To upload a new result sheet to the database you have to fill all 
+            fields and the file must be in (.txt) format.<br>
+            After clicking <stron>'Upload now'</stron> button, all results and students 
+            information will be upload into the database automatically. <br>
+            <strong>Note: Be carefull about every field. You will not be abale to undo this step.</strong>
+        </p>
         <hr>
         <form id="uploadReslt" action="" method="POST" enctype="multipart/form-data">
             <fieldset>
@@ -35,7 +41,7 @@
                 <div class="form-group">
                     <div class="input-group mb-3">
                         <div class="custom-file">
-                            <input type="file" name="inputFile" class="custom-file-input" id="inputFile" onchange="fileName()" required>
+                            <input id="inputFile" type="file" name="inputFile" class="custom-file-input" onchange="fileName()" required>
                             <label class="custom-file-label" for="inputGroupFile02">Choose a .txt file</label>
                         </div>
                             <div class="input-group-append">
@@ -44,14 +50,18 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="progress" id="progressBar" style="visibility:hidden;">
-                <em>Uploading file into database...</em><br>
-                <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            <div id="progressBar" class="hidden-msg">
+                <hr class="my-1">
+                <em>Uploading file into database...</em>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <hr>
             </div>
-            <i id="btnHelp"><small>After clicking <stron>Upload now</stron> button, all results and student information will be upload into the database automatically.</small></i>
-            <button type="submit" class="btn btn-warning btn-block">Upload now</button>
+            <p id="msg" class="success"></p>
+            <button type="submit" id="btn" class="btn btn-warning btn-block">Upload now</button>
+            <i id="btnHelp"><small>Please check twice before clicking the button</small></i>
         </form>
     </div>
 </div>
-
 {% endblock body %}
