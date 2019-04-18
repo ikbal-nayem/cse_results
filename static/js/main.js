@@ -63,3 +63,23 @@ $(document).ready(function(){
         }
     })
 })
+
+//                                          CGPA calculator
+
+$(document).ready(function(){
+    $("#subject-number").change(function(){
+        var gArr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th']
+        $('#subject-inputs').empty()
+        $('#hiddenHelp').addClass('show')
+        for(i=0; i<$(this).val(); i++){
+            var data = "<div style=\"margin-bottom: 10px\">\
+                            <div class=\"row\">\
+                                <div class=\"col\" style=\"text-align:right\"><span>"+ gArr[i] +" :</span></div>\
+                                <div class=\"col\"><input type=\"text\" class=\"form-control form-control-sm\" name=\""+gArr[i]+"\"></div>\
+                                <div class=\"col\"><input type=\"text\" class=\"form-control form-control-sm\" name=\""+gArr[i]+"-c\"></div>\
+                            </div>\
+                        </div>"
+            $('#subject-inputs').append(data)
+        }
+    })
+})

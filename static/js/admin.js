@@ -12,7 +12,7 @@ $(document).ready(function(){
     })
 })
 
-//                                         dropdown
+//                                    login  dropdown
 
 function drop() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -27,6 +27,7 @@ window.onclick = function(e) {
 }
 
 //                                      create table
+
 $(document).ready(function(){
     $('#createTables').on('click', function(){
         $(this).addClass('disabled')

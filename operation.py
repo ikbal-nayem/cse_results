@@ -7,11 +7,7 @@ class backend:
     def __init__(self):
         self.db = database()
         self.table = table()
-
-    def admin_check(self, email, passwd):
-        pswd = self.db.admin(email)
-        return (True if pswd==passwd else False) if pswd else False
-        
+   
 
     def txt2list(self, file):
         '''This function read .txt file of result sheet and return a list of each lines information'''
@@ -75,7 +71,7 @@ class backend:
         
         info = self.db.show_info(reg_no)
         if info == None:
-            return {'exception': 'student_not_found','registration': reg_no,'name': '','batch': '','session': '','semester': '','result': '','cgpa': '',}
+            return {'exception': 'student_not_found', 'registration': reg_no, 'name': '', 'batch': '', 'session': '', 'semester': '','result': '','cgpa': '',}
         courses = list([list(course) for course in self.db.show_courses(semester, info[3])])
         credit = [cr[2] for cr in courses]
         res = self.db.show_result(reg_no, semester, info[3])

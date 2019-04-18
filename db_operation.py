@@ -3,15 +3,8 @@ from conf import db_info
 
 class database:
 	def __init__(self):
-		# self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
-		self.mysql = pymysql.connect(host='localhost', db='results', user='iku', passwd='welcome')
+		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
 		self.c = self.mysql.cursor()
-	
-
-	def admin(self, email):
-		self.c.execute("select password from admin where email='{}'".format(email))
-		passwd = self.c.fetchall()
-		return passwd[0][0] if passwd else False
 	
 
 	def show_info(self, reg_no, *argv):

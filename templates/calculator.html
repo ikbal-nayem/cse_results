@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>CGPA calcutator</h2>
+  <hr class="my-3">
+  <form method="post" action="">
+    <fieldset>
+      <div class="form-group">
+        <label for="exampleSelect1">Total subjects</label>
+        <select class="form-control" id="subject-number" name="select" required>
+          <option value="">Select one</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        <small class="form-text text-muted">Select the number of total subjects.</small>
+      </div>
+      <div id="hiddenHelp" class="hidden-msg">
+          <p>Write your grades (e.g.: A+, A, A-) and cradits (For practical 1.5 and others are 3) bellow.</p>
+          <div style="margin-bottom: 10px">
+            <div class="row">
+                <div class="col" style="text-align:right"><span>Index</span></div>
+                <div class="col">
+                    <span class="badge badge-light" style="width:100%">Grades</span>
+                </div>
+                <div class="col">
+                    <span class="badge badge-light" style="width:100%">Cradits</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      <div id="subject-inputs">
+
+        <!-- Grade field will be added here -->
+
+      </div>
+      <button type="submit" class="btn btn-primary">Calculate</button>
+    </fieldset>
+  </form>
+
+{% if data %}
+  <hr class="my-2">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Index</th>
+      <th scope="col">Grade</th>
+      <th scope="col">Cradit</th>
+    </tr>
+    </thead>
+    {% for i in range(int(len(data['grades']))) %}
+    <tr class="table-active">
+      <th scope="row">{{ data['array'][i] }}</th>
+      <td>{{ data['grades'][i] }}</td>
+      <td>{{ data['cradits'][i] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+    <h2 style="color: red;">Your result is: {{ data['result'] }}</h2>
+{% endif %}
+
+{% endblock %}

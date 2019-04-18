@@ -1,16 +1,9 @@
 import pyrebase
+from conf import login
 
 class admin:
     def __init__(self):
-        config = {
-            "apiKey": "AIzaSyDknVRA5s71ILA3aiFPYzrlKunQbGyXfDE",
-            "authDomain": "cse-result.firebaseapp.com",
-            "databaseURL": "https://cse-result.firebaseio.com",
-            "projectId": "cse-result",
-            "storageBucket": "cse-result.appspot.com",
-            "messagingSenderId": "589177772091"
-        }
-        firebase = pyrebase.initialize_app(config)
+        firebase = pyrebase.initialize_app(login.CONFIG)
         self.auth = firebase.auth()
 
     def login(self, email, passwd):

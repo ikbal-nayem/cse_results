@@ -14,7 +14,7 @@
 }.form-group{
     clear:both;
     overflow: hidden;
-}.input{
+}.form-control{
     outline-color: green !important;
 }.input1{
     width: 49.5%;
@@ -39,8 +39,12 @@
     text-align: center;
     color: yellowgreen;
     display: none;
-}
-
-.show {
+}.show {
+    visibility: visible;
     display: block;
 }
+
+.subject-input-1{
+    width: 50%;
+    margin-right: 5px;
+  }

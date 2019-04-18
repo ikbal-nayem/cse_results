@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from operation import backend
 from adminPanel import admin
-import os, time
+from calculator import cgpa
+import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -9,7 +10,9 @@ app.config['FILES_UPLOAD'] = os.path.join(os.path.dirname(os.path.abspath(__file
 
 @app.context_processor
 def example():
-    return dict(enumerate=enumerate, list=list)
+    return dict(enumerate=enumerate, list=list, len=len, int=int)
+
+#                                       HOME
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -21,11 +24,28 @@ def home():
             return str(e)
     return render_template('home.html')
 
+#                                      CALCULATOR
+
+@app.route('/calculator', methods=['GET', 'POST'])
+def calculator():
+    if request.method == 'POST':
+        gArr = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th']
+        gr, cr= [], []
+        for i in range(int(request.form.get('select'))):
+            gr.append(request.form[gArr[i]].upper())
+            cr.append(float(request.form[gArr[i]+'-c']))
+        json = {'result': cgpa(gr, cr), 'array': gArr, 'grades': gr, 'cradits': cr}
+        return render_template('calculator.html', title='Calculator', data=json)
+    return render_template('calculator.html', title='Calculator')
+
+#                                       API
+
 @app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
 def api(reg_no, semester):
     if request.method=='GET':
         return jsonify(backend().generate_API(reg_no, semester))
 
+#                                       LOGIN
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -39,6 +59,7 @@ def login():
             return res
     return render_template('admin/login.html', title='Admin-login')
 
+#                                   ADMIN PANEL
 
 @app.route('/admin-panel')
 def admin_panel():
