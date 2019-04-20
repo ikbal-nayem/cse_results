@@ -18,7 +18,7 @@ def example():
 def home():
     if request.method=='POST':
         try:
-            js = backend().generate_API(request.form['regiInput'], request.form.get('select'))
+            js = backend().generate_API(request.form['regiInput'], request.form['select'])
             return render_template("result.html", title='Result', info=js)
         except Exception as e:
             return str(e)

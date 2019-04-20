@@ -1,6 +1,7 @@
 //                                  navbar expend
 
 $(document).ready(function(){
+    $('.loading').fadeOut(500)
     $('#navBar').on('click', function(){
         if($(this).attr('aria-expanded')==='true'){
             $(this).attr('aria-expanded', 'false')
@@ -26,7 +27,14 @@ $(document).ready(function(){
         }else{
             $('.alart').removeClass("error-alert")
             $('#resultInfo').attr("success", true)
-            $('#resultInfo').submit()
+            $.ajax({
+                url: '/',
+                type: 'POST',
+                data: {'regiInput': reg, 'select': $('#select').val()},
+                success: function(value){
+                    $('.container').html(value)
+                }
+            })
         }
     })
 })

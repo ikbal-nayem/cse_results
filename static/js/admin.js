@@ -1,6 +1,7 @@
 //                                  navbar expend
 
 $(document).ready(function(){
+    $('.loading').fadeOut("slow")
     $('#navBar').on('click', function(){
         if($(this).attr('aria-expanded')==='true'){
             $(this).attr('aria-expanded', 'false')
