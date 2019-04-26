@@ -1,5 +1,5 @@
 .navbar-brand h2{
-    margin: 0 50px 0 10px;
+    margin: 0 100px 0 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     letter-spacing: -5px;
     text-shadow: -3px 5px 10px rgb(0, 0, 0);
@@ -42,4 +42,32 @@
 }.show {
     visibility: visible;
     display: block;
+}
+
+
+
+
+
+
+#typing > p{
+	font-family: cursive;
+	position: absolute;
+	overflow: hidden;
+    color: transparent;
+}
+#typing > p:before{
+	content: attr(data-text);
+	position: absolute;
+	color: rgb(200, 253, 76);
+	overflow: hidden;
+	border-right: 1px solid red;
+	white-space: nowrap;
+	animation: typing 5s steps(20) infinite;
+}
+@keyframes typing{
+	0%{width: 0;}
+	50%{width: 100%;}
+	70%{width: 100%;}
+	90%{width: 0;}
+    100%{width: 0;}
 }

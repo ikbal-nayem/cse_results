@@ -1,19 +1,32 @@
-//                                  navbar expend
+//                                              navbar
 
 $(document).ready(function(){
     $('.loading').fadeOut(500)
+
+    //                                       navbar extend
+
     $('#navBar').on('click', function(){
-        if($(this).attr('aria-expanded')==='true'){
-            $(this).attr('aria-expanded', 'false')
-        }else{
-            $(this).attr('aria-expanded', 'true')
-        }
+        $(this).attr('aria-expanded') ? $(this).attr('aria-expanded', 'false') : $(this).attr('aria-expanded', 'true')
         $(this).toggleClass('collapsed')
         $('#navbarColor02').toggleClass('show')
     })
+
+    //                                     navbar list active
+
+    $('nav ul li').click(function(){
+        $('nav ul li').removeClass('active')
+        $(this).addClass('active')
+    })
+    if(window.location.pathname.split('/')[1] === ''){
+        $('nav ul #result').addClass('active')
+    }
+    else{
+        $('nav ul li').removeClass('active')
+        $('nav ul #'+ window.location.pathname.split('/')[1]).addClass('active')
+    }
 })
 
-//                          check registration number
+//                          check registration number and result
 
 $(document).ready(function(){
     $('#resultInfo').on('submit', function(event){
@@ -23,9 +36,11 @@ $(document).ready(function(){
         event.preventDefault()
         var reg = $('#reg_no').val()
         if(!$.isNumeric(reg)){
+            $('#reg_no').addClass('is-invalid')
             $('.alart').html("Invalid registration number.").addClass("error-alert")
         }else{
-            $('.alart').removeClass("error-alert")
+            $('.alart').html('Finding result...').removeClass("error-alert")
+            $('#reg_no').removeClass('is-invalid')
             $('#resultInfo').attr("success", true)
             $.ajax({
                 url: '/',
@@ -43,29 +58,36 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#loginForm').on('submit', function(event){
+        $('#login-btn').addClass('disabled').html('<span id="checking"></span> Checking...')
+        $('#checking').addClass('spinner-border spinner-border-sm')
+        $('#invalidEmail').removeClass('show')
+        $('#invalidPasswd').removeClass('show')
+        $('#loginEmail').removeClass('is-invalid')
+        $('#loginPasswd').removeClass('is-invalid')
         if($(this).attr("success")){
             return true
         }else{
             event.preventDefault()
-            res = $.ajax({
+            $.ajax({
                 url: '/login',
                 type: 'POST',
-                data: {'email':$('#loginEmail').val(), 'passwd': $('#loginPasswd').val()}
-            })
-            res.done(function(resp){
-                if(resp.error){
-                    if(resp.error.errors[0].message === "EMAIL_NOT_FOUND"){
-                        $('#invalidEmail').html('Email not found').css({'color': 'red'})
-                        $('#invalidPasswd').css({'display': 'none'})
-                    }else if(resp.error.errors[0].message === "INVALID_PASSWORD"){
-                        $('#invalidEmail').css({'display': 'none'})
-                        $('#invalidPasswd').html('Invalid Password').css({'color': 'red'})
+                data: {'email':$('#loginEmail').val(), 'passwd': $('#loginPasswd').val()},
+                success: function(resp){
+                    $('#login-btn').removeClass('disabled').html('<span id="checking"></span> Login')
+                    $('#checking').removeClass('spinner-border spinner-border-sm')
+                    if(resp === "EMAIL_NOT_FOUND"){
+                        $('#loginEmail').addClass('is-invalid')
+                        $('#invalidEmail').html('Email not found').addClass('show')
+                    }else if(resp === "INVALID_PASSWORD"){
+                        $('#loginPasswd').addClass('is-invalid')
+                        $('#invalidPasswd').html('Invalid Password').addClass('show')
+                    }else if(resp === false){
+                        alert("somethimg was wrong!")
                     }
-                }else{
-                    $('#invalidEmail').css({'display': 'none'})
-                    $('#invalidPasswd').css({'display': 'none'})
-                    $("#loginForm").attr("success",true);
-                    $("#loginForm").submit()
+                    else{
+                        $('#loginForm').attr("success", true)
+                        $("#loginForm").submit()
+                    }
                 }
             })
         }

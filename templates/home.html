@@ -1,21 +1,30 @@
 {% extends "layout.html" %}
 {% block body %}
+<div class="loading">
+    <div class="spinner-grow center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 <div class="jumbotron">
     <h1 class="display-4">Result</h1>
     <p>For CSE department Tejgaon college, Dhaka-123</p>
-    <hr class="my-4">
+    <hr class="my-2">
     <p>
         Now you will able to see your result by your <strong>registration number. </strong>
+        (Previous results also)
         You just need to write your registration number and then 
         select your semester correctly. <br>
         <strong>Good luck...</strong>
     </p>
-    <br>
+    <div id="typing">
+        <p data-text="{{semester}} semester result has been published.">{{semester}} semester result has been published.</p>
+    </div><br>
     <form id="resultInfo" class="form-group" method="post" action="">
         <div class="form-group input1">
             <label class="form-control-label">Registration no.</label>
             <input id="reg_no" type="text" required placeholder="Registration No..." class="form-control input" name="regiInput" autofocus>
-            <small class="alart">Write your registration number here.</small>
+            <small class="alart">Registration number (e.g: 16502000...)</small>
         </div>
         <div class="input1">
             <label class="form-control-label">Semester</label>
@@ -32,7 +41,7 @@
             </select>
             <small>Choose a semester</small>
         </div>
-        <button type="submit" class="btn btn-outline-info btn-lg btn-block">See result</button>
+        <button type="submit" class="btn btn-outline-info btn-block">See result</button>
     </form>
 </div>
 {% endblock body %}

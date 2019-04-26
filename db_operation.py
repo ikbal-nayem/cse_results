@@ -89,7 +89,7 @@ class table(database):
 		try:
 			course1 = 'create table course(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
 			course2 = 'create table course_new(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
-			student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(40), batch int(2), session varchar(7))'
+			student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(50), batch int(2), session varchar(10))'
 			self.c.execute(course1)
 			self.c.execute(course2)
 			print('course table ready..')

@@ -1,9 +1,10 @@
 {% extends "admin/layout_admin.html" %}
-{% block navbar %}
-{% include "admin/admin_nav.html" %}
-{% endblock navbar %}
 {% block body %}
-
+<div class="loading">
+    <div class="spinner-grow center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 {% if name %}
 <h1>{{ name }},</h1>
 {% endif %}

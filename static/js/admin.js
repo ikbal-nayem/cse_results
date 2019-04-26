@@ -1,16 +1,23 @@
-//                                  navbar expend
+//                                              navbar
 
 $(document).ready(function(){
     $('.loading').fadeOut("slow")
+    //                                       navbar extend
+
     $('#navBar').on('click', function(){
-        if($(this).attr('aria-expanded')==='true'){
-            $(this).attr('aria-expanded', 'false')
-        }else{
-            $(this).attr('aria-expanded', 'true')
-        }
+        $(this).attr('aria-expanded') ? $(this).attr('aria-expanded', 'false') : $(this).attr('aria-expanded', 'true')
         $(this).toggleClass('collapsed')
         $('#navbarColor02').toggleClass('show')
     })
+    //                                    navbar list active
+
+    $('nav ul li').click(function(){
+        $('nav ul li').removeClass('active')
+        $(this).addClass('active')
+    })
+    if(window.location.pathname.split('/').pop()){
+        $('nav ul #'+ window.location.pathname.split('/').pop()).addClass('active')
+    }
 })
 
 //                                    login  dropdown

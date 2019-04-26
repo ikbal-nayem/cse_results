@@ -15,6 +15,7 @@ def example():
 #                                       HOME
 
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/result')
 def home():
     if request.method=='POST':
         try:
@@ -22,7 +23,7 @@ def home():
             return render_template("result.html", title='Result', info=js)
         except Exception as e:
             return str(e)
-    return render_template('home.html')
+    return render_template('home.html', semester=SEMESTER)
 
 #                                      CALCULATOR
 
@@ -68,7 +69,15 @@ def admin_panel():
     else: 
         return redirect('login')  
 
+@app.route('/new-admin/', methods=['POST', 'GET'])
+def new_admin():
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template('admin/new_admin.html', title='New admin')
 
+SEMESTER = '1nd'
+YEAR = ''
 @app.route('/admin/upload', methods=['GET', 'POST'])
 def uploadTXT():
     if 'user' in session:
@@ -78,6 +87,8 @@ def uploadTXT():
             txt = request.files['inputFile']
             txt.save(os.path.join(app.config['FILES_UPLOAD'], txt.filename))     
             backend().upload_results(txt.filename, semester, year)
+            global SEMESTER, YEAR
+            SEMESTER, YEAR = semester, year
             return jsonify({"success":True})
         return render_template('admin/upload.html', title='Admin-Upload')
     else:

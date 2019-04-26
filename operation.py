@@ -63,7 +63,10 @@ class backend:
             batch = int(session[2:4])-8
             self.db.insert_student(reg_no, name, batch, session)
             self.db.insert_result(reg_no, semester, res, year, session)
-        os.remove(file)
+        try:
+            os.remove(file)
+        except:
+            pass
 
 
     def generate_API(self, reg_no, semester):
@@ -104,5 +107,4 @@ class backend:
             'exam year': res[-1],
         }
         return json
-
 

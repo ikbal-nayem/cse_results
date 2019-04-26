@@ -5,14 +5,17 @@ class admin:
     def __init__(self):
         firebase = pyrebase.initialize_app(login.CONFIG)
         self.auth = firebase.auth()
+        self.ex = False
 
     def login(self, email, passwd):
         try:
             self.auth.sign_in_with_email_and_password(email, passwd)
-            return True
+            self.ex = True
         except Exception as e:
             import json
-            return json.loads(e.args[-1])
+            self.ex = json.loads(e.args[1])['error']['message']
+        finally:
+            return self.ex
 
 
     def add_new(self, email, passwd):
@@ -20,5 +23,3 @@ class admin:
     
     def remove(self, email):
         pass
-
-# admin().login("ikbalnayem000@gmail.com", "welcome back")
