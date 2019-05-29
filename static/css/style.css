@@ -24,9 +24,7 @@
     color: rgb(74, 173, 240);
     text-align: center;
 }.colon{
-    float: right;
-    overflow: hidden;
-    color: #a8f551;
+    color: #90fc02;
 }.table td, .table th{
     padding: 5px;
 }.hidden-msg{
@@ -48,7 +46,11 @@
 
 
 
-
+#typing{
+    display: block;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
 #typing > p{
 	font-family: cursive;
 	position: absolute;
@@ -62,12 +64,12 @@
 	overflow: hidden;
 	border-right: 1px solid red;
 	white-space: nowrap;
-	animation: typing 5s steps(20) infinite;
+	animation: typing 10s steps(25) infinite;
 }
 @keyframes typing{
 	0%{width: 0;}
-	50%{width: 100%;}
-	70%{width: 100%;}
+	40%{width: 100%;}
+	80%{width: 100%;}
 	90%{width: 0;}
     100%{width: 0;}
 }

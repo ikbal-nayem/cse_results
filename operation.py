@@ -106,5 +106,6 @@ class backend:
             'cgpa': cgpa,
             'exam year': res[-1],
         }
+        self.db.conn_close()
         return json
 

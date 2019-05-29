@@ -1,41 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
 <div class="card border-info mb-3" style="max-width: 100%;">
     <h3 class="card-header card-title">Student information</h3>
     <div class="card-body">
-        <table width="100%" border="0" cellpadding="3" cellspacing="1">
-            <tbody>
-            <tr>
-                <td width="20%" align="left">Name<div class="colon">:</div></td>
-                <td width="40%" align="left">{{ info['name'] }}</td>
-                <td width="20%" align="left">Reg No<div class="colon">:</div></td>
-                <td width="20%" align="left">{{ info['registration'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Batch<div class="colon">:</div></td>
-                <td align="left">{{ info['batch'] }}</td>
-                <td align="left">Session<div class="colon">:</div></td>
-                <td align="left">{{ info['session'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Institute<div class="colon">:</div></td>
-                <td align="left">Tejgaon College, Dhaka-123</td>
-                <td align="left">Semester<div class="colon">:</div></td>
-                <td align="left">{{ info['semester'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Result<div class="colon">:</div></td>
-            {% if info['result']=='FAILED' %}
-                <td align="left"><strong class="text-warning">{{ info['result'] }}</strong></td>
-            {% else %}
-                <td align="left"><strong id="result" class="text-success">{{ info['result'] }}</strong></td>
-            {% endif %}
-                <td align="left">Exam year<div class="colon">:</div></td>
-                <td align="left">{{ info['exam year'] }}</td>
-            <tr>
-                <td align="left">CGPA<div class="colon">:</div></td>
-                <td align="left"><strong class="text-success">{{ info['cgpa'] }}</strong></td>
-            </tr>
-            </tbody>
-        </table>
+        <dev class="row">
+            <dev class="col">
+                <p>Name <span class="colon">:</span> {{ info['name'] }}</p>
+            </dev>
+            <dev class="col">
+                <p>Reg No. <span class="colon">:</span> {{ info['registration'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Batch <span class="colon">:</span> {{ info['batch'] }}</p>
+            </dev>
+            <dev class="col">
+                <p>session <span class="colon">:</span> {{ info['session'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Institute <span class="colon">:</span> Tejgaon College Dhaka-1215</p>
+            </dev>
+            <dev class="col">
+                <p>Semester <span class="colon">:</span> {{ info['semester'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Result <span class="colon">:</span> <strong id="result" class="text-success">{{ info['result'] }}</strong></p>
+            </dev>
+            <dev class="col">
+                <p>Exam year <span class="colon">:</span> {{ info['exam year'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>CGPA <span class="colon">:</span> {{ info['cgpa'] }}</p>
+            </dev>
+        </dev>
     </div>
 </div>
 <div>
@@ -83,3 +87,4 @@
     <a href="{{url_for('home')}}" class="card-link"><button type="button" class="btn btn-outline-info btn-block">Go back home</button></a>
 <hr class="my-3">
 </div>
+{% endblock body %}

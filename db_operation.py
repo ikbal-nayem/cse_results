@@ -6,6 +6,8 @@ class database:
 		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
 		self.c = self.mysql.cursor()
 	
+	def conn_close(self):
+		self.mysql.close()
 
 	def show_info(self, reg_no, *argv):
 		'''To select student information'''

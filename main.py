@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from operation import backend
 from adminPanel import admin
@@ -15,14 +16,14 @@ def example():
 #                                       HOME
 
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/result')
+@app.route('/result', methods=['GET', 'POST'])
 def home():
     if request.method=='POST':
         try:
             js = backend().generate_API(request.form['regiInput'], request.form['select'])
             return render_template("result.html", title='Result', info=js)
         except Exception as e:
-            return str(e)
+            return render_template('includes/error.html', err=str(e))
     return render_template('home.html', semester=SEMESTER)
 
 #                                      CALCULATOR
@@ -76,7 +77,7 @@ def new_admin():
     else:
         return render_template('admin/new_admin.html', title='New admin')
 
-SEMESTER = '1nd'
+SEMESTER = '1st'
 YEAR = ''
 @app.route('/admin/upload', methods=['GET', 'POST'])
 def uploadTXT():

@@ -1,6 +1,22 @@
 {% extends "layout.html" %}
 {% block body %}
-<h1>{{ err.split(',')[0].strip()[1:] }}</h1>
-<hr>
-<a href="{{ url_for('home') }}">Go to home</a>
+<img src="{{ url_for('static', filename='icon/error.png') }}" alt="error">
+<div class="body">
+    <h1>Error</h1>
+    <p>Code: {{ err.split(',')[0].strip()[1:] }}</p>
+    <hr>
+    <a href="{{ url_for('home') }}">Go to home</a>
+</div>
+
+<style>
+    img, .body{
+        overflow: hidden;
+        float: left;
+        margin: 5px;
+    }
+    img{
+        height: 250px;
+        width: 250px;
+    }
+</style>
 {% endblock %}

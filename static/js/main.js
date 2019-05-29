@@ -42,14 +42,14 @@ $(document).ready(function(){
             $('.alart').html('Finding result...').removeClass("error-alert")
             $('#reg_no').removeClass('is-invalid')
             $('#resultInfo').attr("success", true)
-            $.ajax({
-                url: '/',
-                type: 'POST',
-                data: {'regiInput': reg, 'select': $('#select').val()},
-                success: function(value){
-                    $('.container').html(value)
-                }
-            })
+            // $.ajax({
+            //     url: '/',
+            //     type: 'POST',
+            //     data: {'regiInput': reg, 'select': $('#select').val()},
+                // success: function(value){
+                //     $('.container').html(value)
+                // }
+            // })
         }
     })
 })
