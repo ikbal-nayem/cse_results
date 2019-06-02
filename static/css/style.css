@@ -40,6 +40,12 @@
 }.show {
     visibility: visible;
     display: block;
+}.autocomplete{
+    background: rgb(204, 247, 236);
+    color: black;
+    font-size: initial;
+    border-radius: 5px;
+    font-family: initial;
 }
 
 

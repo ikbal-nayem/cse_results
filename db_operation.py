@@ -9,6 +9,20 @@ class database:
 	def conn_close(self):
 		self.mysql.close()
 
+	def find_name(self, batch):
+		q = "select name from student_info where batch='{}'".format(batch)
+		self.c.execute(q)
+		names = [name[0] for name in self.c.fetchall()]
+		self.mysql.close()
+		return names if len(names)!=0 else False
+
+	def find_regi(self, batch, name):
+		q = "select reg_no from student_info where batch={} and name='{}'".format(batch, name)
+		self.c.execute(q)
+		reg = self.c.fetchall()[0][0]
+		self.mysql.close()
+		return reg
+
 	def show_info(self, reg_no, *argv):
 		'''To select student information'''
 
@@ -80,7 +94,7 @@ class database:
 		self.c.execute(q)
 		self.mysql.commit()
 
-	
+
 
 class table(database):
 	'''Creating all tables and upload all information into course table'''

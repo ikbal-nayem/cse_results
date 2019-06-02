@@ -42,14 +42,7 @@ $(document).ready(function(){
             $('.alart').html('Finding result...').removeClass("error-alert")
             $('#reg_no').removeClass('is-invalid')
             $('#resultInfo').attr("success", true)
-            // $.ajax({
-            //     url: '/',
-            //     type: 'POST',
-            //     data: {'regiInput': reg, 'select': $('#select').val()},
-                // success: function(value){
-                //     $('.container').html(value)
-                // }
-            // })
+            $(this).submit()
         }
     })
 })
@@ -113,3 +106,68 @@ $(document).ready(function(){
         }
     })
 })
+
+
+//                                      search student
+
+$(document).ready(function(){
+    var error = function(id, msg, disabled=true){
+        $(id).html(msg).addClass('error-alert')
+        $(id).prev().addClass('is-invalid')
+        $('#autocomplete').attr('disabled', disabled)     
+    }
+    var success = function(id, msg=''){
+        $(id).html(msg).removeClass(error-alert)
+        $(id).prev().removeClass('is-invalid')
+        $('#autocomplete').removeAttr('disabled')
+    }
+    var stdList = []
+    var get_list = function(data){ stdList = data }
+    $('#batch').keyup(function(){
+        if($.isNumeric($('#batch').val())){
+            success('#batchErr')
+        }else{
+            error('#batchErr', 'Batch number should be numaric form.')
+        }
+    })
+    $('#autocomplete').on('focus',function(){
+        $.ajax({
+            url: '/result/find',
+            type: 'POST',
+            data: {'batch' : $('#batch').val()},
+            success: function(list){
+                if(list==[]){
+                    error('#batchErr', 'No student found of this batch.')
+                }else{
+                    success("#batchErr")
+                    $("#autocomplete").autocomplete({
+                        source: list,
+                        autoFocus: true,
+                        classes: {
+                            'ui-autocomplete': 'autocomplete',
+                        }
+                    })
+                get_list(list)
+                }
+            }
+        })
+    })
+    $('#autocomplete').on('change', function(){
+        if(stdList.indexOf($('#autocomplete').val()) == -1){
+            error('#nameErr', 'Select name from suggestion list', false)
+        }else{
+            success('#nameErr')
+            $.ajax({
+                url: '/result/find',
+                type: 'POST',
+                data: {
+                    'batch': $('#batch').val(),
+                    'name': $('#autocomplete').val()
+                },
+                success: function(reg){
+                    $('#reg').val(reg.reg_no)
+                }
+            })
+        }
+    })
+});

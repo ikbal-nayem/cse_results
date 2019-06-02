@@ -1,8 +1,8 @@
-
 from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from operation import backend
 from adminPanel import admin
 from calculator import cgpa
+from db_operation import database
 import os
 
 app = Flask(__name__)
@@ -25,6 +25,15 @@ def home():
         except Exception as e:
             return render_template('includes/error.html', err=str(e))
     return render_template('home.html', semester=SEMESTER)
+
+@app.route('/result/find', methods=['GET', 'POST'])
+def find():
+    if request.method == 'POST':
+        try:
+            return jsonify({'reg_no': database().find_regi(request.form['batch'], request.form['name'])})
+        except:
+            return jsonify(database().find_name(request.form['batch']))
+    return render_template('find_student.html', title='Find yourself')
 
 #                                      CALCULATOR
 
