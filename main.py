@@ -35,6 +35,21 @@ def find():
             return jsonify(database().find_name(request.form['batch']))
     return render_template('find_student.html', title='Find yourself')
 
+@app.route('/subscribe', methods=['POST'])
+def email():
+    if database().add_email(request.form['reg_no'], request.form['email']):
+        return jsonify({'submitted':True, 'htmlValue': render_template('email.html')})
+    else:
+        return jsonify({'submitted': False})
+
+#                                       API
+
+@app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
+def api(reg_no, semester):
+    if request.method=='GET':
+        return jsonify(backend().generate_API(reg_no, semester))
+
+
 #                                      CALCULATOR
 
 @app.route('/calculator', methods=['GET', 'POST'])
@@ -48,13 +63,6 @@ def calculator():
         json = {'result': cgpa(gr, cr), 'array': gArr, 'grades': gr, 'cradits': cr}
         return render_template('calculator.html', title='Calculator', data=json)
     return render_template('calculator.html', title='Calculator')
-
-#                                       API
-
-@app.route('/result/api/<string:semester>/<string:reg_no>', methods=['POST', 'GET'])
-def api(reg_no, semester):
-    if request.method=='GET':
-        return jsonify(backend().generate_API(reg_no, semester))
 
 #                                       LOGIN
 
@@ -86,6 +94,8 @@ def new_admin():
     else:
         return render_template('admin/new_admin.html', title='New admin')
 
+#                                              upload file
+
 SEMESTER = '1st'
 YEAR = ''
 @app.route('/admin/upload', methods=['GET', 'POST'])
@@ -112,6 +122,7 @@ def create_tables():
             backend().create_tables_in_database()
         return render_template('admin/create_table.html', title='Admin- Create-tables')
     return redirect('login')
+
 
 
 

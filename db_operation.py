@@ -7,7 +7,30 @@ class database:
 		self.c = self.mysql.cursor()
 	
 	def conn_close(self):
+		self.mysql.commit()
 		self.mysql.close()
+	
+	def add_email(self, reg_no, email):
+		q1 = "select reg_no from student_info where email='{}'".format(email)
+		self.c.execute(q1)
+		if len(self.c.fetchall()) == 0:
+			q2 = "update student_info set email='{}' where reg_no='{}'".format(email, reg_no)
+			self.c.execute(q2)
+			self.conn_close()
+			return True
+		else:
+			self.conn_close()
+			return False
+	
+	def find_email(self, semester, year):
+		q = """select si.reg_no, email 
+			from student_info as si, {}_semester as 3s 
+			where si.reg_no=3s.reg_no and year='{}' 
+			and email is not NULL""".format(semester, year)
+		self.c.execute(q)
+		address = [list(e) for e in self.c.fetchall()]
+		self.conn_close()
+		return address
 
 	def find_name(self, batch):
 		q = "select name from student_info where batch='{}'".format(batch)

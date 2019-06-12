@@ -1,5 +1,6 @@
 from db_operation import database, table
 from flask import jsonify
+from multiprocessing import Process
 import calculator
 import os
 
@@ -65,9 +66,15 @@ class backend:
             self.db.insert_result(reg_no, semester, res, year, session)
         try:
             os.remove(file)
+            self.send_mail(semester, year)
         except:
             pass
-
+    
+    def send_mail(self, semester, year):
+        from service import mail
+        email = mail()
+        process = Process(target=email.send, args=(semester, year))
+        process.start()
 
     def generate_API(self, reg_no, semester):
         '''This function will generate a json API for template and requested clients'''

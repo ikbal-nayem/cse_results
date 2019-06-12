@@ -84,7 +84,34 @@
     </table>
 {% endif %}
 <hr class="my-3">
-    <a href="{{url_for('home')}}" class="card-link"><button type="button" class="btn btn-outline-info btn-block">Go back home</button></a>
+    <div class="btn-group btn-block" role="group" aria-label="Button group with nested">
+        <a href="{{url_for('home')}}" class="btn btn-outline-info">See another</a>
+
+        <button id="btnGroupDrop" class="btn btn-outline-info dropdown-toggle" data-toggle="collapse" data-target="email-collapse" aria-haspopup="true" aria-expanded="false">
+          Next result in Email
+        </button>
+    </div>
+    <div class="collapse" id="email-collapse">
+        <div class="card card-body" id="subscribtion">
+            <p class="card-text">
+                I will send your result truough your email adderss whenever i get it. <br>
+                Note: check your email address twice. You will not get any email if you provide wrong one.
+            </p>
+            <form id="getEmail" action="" method="post">
+                <div class="form-group">
+                    <label for="reg_no">Registration no.</label>
+                    <input id="reg_no" class="form-control form-control-sm" type="text" placeholder="registration" value="{{ info['registration'] }}" required>
+                    <small>Change it if this is not your's.</small>
+                </div>
+                <div class="form-group">
+                    <label for="putEmail">Email address</label>
+                    <input type="email" class="form-control" id="putEmail" placeholder="name@example.com" required>
+                    <small>We'll never share your email with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-outline-info">Submit</button>
+            </form>
+        </div>
+    </div>
 <hr class="my-3">
 </div>
 {% endblock body %}

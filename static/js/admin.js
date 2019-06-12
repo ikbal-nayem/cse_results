@@ -100,20 +100,27 @@ $(document).ready(function(){
 
     $('#uploadReslt').submit(function(event){
         event.preventDefault()
+        event.stopImmediatePropagation()
         progressBar()
-        $.ajax({
-            url: '/admin/upload',
-            type: $(this).attr("method"),
-            data: new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(msg){
-                if(msg.success){
-                    $('#msg').html('File '+ document.getElementById('inputFile').files[0].name +' has been uploaded successfully!').addClass('show')
-                    progressBar_hide()
+        if($(this).attr('submitted')){
+            $.ajax({
+                url: '/admin/upload',
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(msg){
+                    if(msg.success){
+                        $('#msg').html('File '+ document.getElementById('inputFile').files[0].name +' has been uploaded successfully!').addClass('show')
+                        progressBar_hide()
+                    }
+                },
+                complete: function(){
+                    $('#uploadReslt').attr('submitted', false)
                 }
-            }
-        })        
+            })
+        }
+        return false      
     })
 })

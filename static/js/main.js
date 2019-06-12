@@ -29,6 +29,15 @@ $(document).ready(function(){
 //                          check registration number and result
 
 $(document).ready(function(){
+    var error = function(id, msg){
+        $(id).addClass('is-invalid')
+        $(id).next().html(msg).addClass('error-alert')     
+    }
+    var success = function(id, msg=''){
+        $(id).removeClass('is-invalid')
+        $(id).next().html(msg).removeClass('error-alert')
+    }
+
     $('#resultInfo').on('submit', function(event){
         if($(this).attr("success")){
             return true
@@ -44,6 +53,28 @@ $(document).ready(function(){
             $('#resultInfo').attr("success", true)
             $(this).submit()
         }
+    })
+
+    $('#btnGroupDrop').on('click', function(){
+        $('#'+$(this).attr('data-target')).slideToggle()
+    })
+
+    $('#getEmail').on('submit', function(event){
+        reg = $('#reg_no').val()
+        email = $('#putEmail').val()
+        event.preventDefault()
+        $.ajax({
+            url: '/subscribe',
+            type: 'POST',
+            data: {'reg_no': reg, 'email': email},
+            success: function(value){
+                if(value.submitted){
+                    $('#subscribtion').slideUp('slow').html(value.htmlValue).slideDown('slow')
+                }else{
+                    error('#putEmail', 'Email is used before.')
+                }
+            }
+        })
     })
 })
 
