@@ -38,7 +38,7 @@ def find():
 @app.route('/subscribe', methods=['POST'])
 def email():
     if database().add_email(request.form['reg_no'], request.form['email']):
-        return jsonify({'submitted':True, 'htmlValue': render_template('email.html')})
+        return jsonify({'submitted':True, 'htmlValue': render_template('get_email.html')})
     else:
         return jsonify({'submitted': False})
 
