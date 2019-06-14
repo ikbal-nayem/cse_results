@@ -75,12 +75,16 @@ class database:
 		return self.c.fetchall()
 
 	def show_result(self, reg_no, semester, session):
-		code = self.show_courses(semester, session, 'code')
-		codes = [ele[0] for ele in code]
-		q = "select "+','.join(codes)+", year from {}_semester where reg_no='{}'".format(semester, reg_no)
-		self.c.execute(q)
-		res = self.c.fetchall()
-		return res[0] if res else None
+		try:
+			code = self.show_courses(semester, session, 'code')
+			codes = [ele[0] for ele in code]
+			q = "select "+','.join(codes)+", year from {}_semester where reg_no='{}'".format(semester, reg_no)
+			self.c.execute(q)
+			res = self.c.fetchall()
+			return res[0] if res else None
+		except:
+			self.conn_close()
+			return False
 
 
 	def insert_student(self, reg_no, name, batch, session):
