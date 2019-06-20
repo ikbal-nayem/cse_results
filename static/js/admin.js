@@ -124,3 +124,60 @@ $(document).ready(function(){
         return false      
     })
 })
+
+//                              New admin
+
+$(document).ready(()=>{
+    var error = function(id){
+        $(id).addClass('is-invalid')
+        $(id).next().addClass('error-alert')
+    }
+    var success = function(id){
+        $(id).removeClass('is-invalid')
+        $(id).next().removeClass('error-alert')
+        $(id).addClass('is-valid')
+    }
+    $('#newAdmin input').on('click', function(){
+        $('#newAdmin small').addClass('hidden-msg').slideUp()
+        $(this).next().removeClass('hidden-msg').slideDown()
+    })
+    $('#inputPassword1').keyup(function(){
+        if($(this).val().length < 8){
+            error($(this))
+        } else {
+            success($(this))
+        }
+    })
+    $('#inputPassword2').keyup(function(){
+        var pass1 = $('#inputPassword1').val()
+        if($(this).val() === pass1){
+            success($(this))
+        }else{
+            error($(this))
+        }
+    })
+    $('#newAdmin').submit(function(event){
+        event.preventDefault()
+        if($('#inputPassword2').val()===$('#inputPassword1').val()){
+            $('#inputPassword2').removeClass('is-valid')
+            $('#createAdmin').addClass('disabled').html('<span id="creating"></span> Creating...')
+            $('#creating').addClass('spinner-border spinner-border-sm')
+            $.ajax({
+                url: '/new-admin/',
+                type: 'POST',
+                data: {
+                    'email': $('#inputEmail').val(),
+                    'password': $('#inputPassword2').val()
+                },
+                success: function(data){
+                    $('#createAdmin').removeClass('disabled').html('Create')
+                    if(data.success){
+                        $('#alert').html('Successfully created a new admin!').removeClass('alert-danger').addClass('alert-success').slideDown('slow')
+                    } else {
+                        $('#alert').html('Falied to create admin! Try again later.').removeClass('alert-success').addClass('alert-danger').slideDown('slow')
+                    }
+                }
+            })
+        }
+    })
+})

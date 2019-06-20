@@ -90,7 +90,8 @@ def admin_panel():
 @app.route('/new-admin/', methods=['POST', 'GET'])
 def new_admin():
     if request.method == 'POST':
-        pass
+        v = admin().add_new(request.form['email'], request.form['password'])
+        return jsonify({'success': True}) if v else jsonify({'success': False})
     else:
         return render_template('admin/new_admin.html', title='New admin')
 

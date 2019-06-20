@@ -1,4 +1,4 @@
-import pyrebase
+import pyrebase, json
 from conf import login
 
 class admin:
@@ -12,14 +12,19 @@ class admin:
             self.auth.sign_in_with_email_and_password(email, passwd)
             self.ex = True
         except Exception as e:
-            import json
             self.ex = json.loads(e.args[1])['error']['message']
         finally:
             return self.ex
 
 
     def add_new(self, email, passwd):
-        user = self.auth.create_user_with_email_and_password(email, passwd)
-    
-    def remove(self, email):
-        pass
+        try:
+            user = self.auth.create_user_with_email_and_password(email, passwd)
+            self.auth.send_email_verification(user['idToken'])
+            self.ex = True
+        except Exception:
+            self.ex = False
+        finally:
+            return self.ex
+            
+
