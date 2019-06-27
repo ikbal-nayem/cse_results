@@ -49,5 +49,12 @@ class admin:
         self.db.child('log').child(dt.date()).child(str(dt.hour)+':'+str(dt.minute)+':'+str(dt.second)).set(data)
 
     def get_last_result(self):
-        data = self.db.child('log').order_by_child('2019-06-26').limit_to_first(1).get().val()
-        print(data)
+        data = self.db.child('log').get().val()
+        li, ti = [], []
+        for date in data:
+            for time in data[date]:
+                li.append(date)
+        for time in data[sorted(li)[-1]]:
+            ti.append(time)
+        d = data[sorted(li)[-1]][sorted(ti)[-1]]
+        return d['semester'], d['year']

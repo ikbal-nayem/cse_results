@@ -6,7 +6,6 @@
     <thead style="color: cornsilk">
       <tr>
         <th scope="col">Date</th>
-        <th scope="col">Session</th>
         <th scope="col">Semester</th>
         <th scope="col">Year</th>
         <th scope="col">Posted by</th>
@@ -16,7 +15,6 @@
       {% for log in data %}
       <tr>
         <td class="row">{{ log['date'] }}</td>
-        <td>{{ log['session'] }}</td>
         <td>{{ log['semester'] }}</td>
         <td>{{ log['year'] }}</td>
         <td>{{ log['admin'] }}</td>

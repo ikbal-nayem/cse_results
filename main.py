@@ -6,6 +6,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 app.config['FILES_UPLOAD'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'upload')
+SEMESTER, YEAR = admin().get_last_result()
 
 @app.context_processor
 def example():
@@ -22,7 +23,7 @@ def home():
             return render_template("result.html", title='Result', info=js)
         except Exception as e:
             return render_template('includes/error.html', err=str(e))
-    return render_template('home.html', semester=SEMESTER)
+    return render_template('home.html', semester=SEMESTER, year=YEAR)
 
 @app.route('/result/find', methods=['GET', 'POST'])
 def find():
@@ -98,8 +99,7 @@ def new_admin():
 
 #                                              upload file
 
-SEMESTER = '1st'
-YEAR = ''
+
 @app.route('/admin/upload', methods=['GET', 'POST'])
 def uploadTXT():
     if 'user' in session:
@@ -109,8 +109,6 @@ def uploadTXT():
             txt = request.files['inputFile']
             txt.save(os.path.join(app.config['FILES_UPLOAD'], txt.filename))     
             backend().upload_results(txt.filename, semester, year, session['user'])
-            global SEMESTER, YEAR
-            SEMESTER, YEAR = semester, year
             return jsonify({"success":True})
         return render_template('admin/upload.html', title='Admin-Upload', user=session['user'])
     else:

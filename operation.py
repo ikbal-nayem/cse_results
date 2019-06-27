@@ -67,7 +67,7 @@ class backend:
             self.db.insert_result(reg_no, semester, res, year, session)
         try:
             os.remove(file)
-            admin().post_log({'admin': user, 'session': session, 'semester': semester, 'year': year})
+            admin().post_log({'admin': user, 'semester': semester, 'year': year})
             self.send_mail(semester, year)
         except Exception:
             pass
