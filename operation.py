@@ -1,5 +1,6 @@
 from db_operation import database, table
 from flask import jsonify
+from adminPanel import admin
 from multiprocessing import Process
 import calculator
 import os
@@ -54,7 +55,7 @@ class backend:
         return self.table.create_tables(courseList1, courseList2)
     
 
-    def upload_results(self, filename, semester, year):
+    def upload_results(self, filename, semester, year, user):
         '''This will take result (.txt) file and pass to the student_info and result table'''
 
         file = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'upload'), filename)
@@ -66,8 +67,9 @@ class backend:
             self.db.insert_result(reg_no, semester, res, year, session)
         try:
             os.remove(file)
+            admin().post_log({'admin': user, 'session': session, 'semester': semester, 'year': year})
             self.send_mail(semester, year)
-        except:
+        except Exception:
             pass
     
     def send_mail(self, semester, year):

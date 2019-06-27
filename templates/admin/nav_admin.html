@@ -16,14 +16,14 @@
                 <a class="nav-link" href="{{ url_for('create_tables') }}">Create tables</a>
             </li>
             <li id="log" class="nav-item">
-                <a class="nav-link" href="#log">Log</a>
+                <a class="nav-link" href="{{ url_for('log') }}">Log</a>
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
             <div class="nav-item dropdown">
-                <a onclick="drop()" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Action</a>
+                <a onclick="drop()" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
                 <div id="myDropdown" class="dropdown-menu dropdown-content" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: -60px; transform: translate3d(0px, 45px, 0px);">
-                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="">Action</a>
                     <a class="dropdown-item" href="{{ url_for('new_admin') }}">Create a admin</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url_for('login') }}">Logout</a>
@@ -32,4 +32,3 @@
         </div>
     </div>  
 </nav>
-    

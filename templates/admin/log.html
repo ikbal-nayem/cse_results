@@ -1,0 +1,27 @@
+{% extends "admin/layout_admin.html" %}
+{% block body %}
+<h1>.txt file upload log</h1>
+<hr class="my-2">
+<table class="table table-hover">
+    <thead style="color: cornsilk">
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Session</th>
+        <th scope="col">Semester</th>
+        <th scope="col">Year</th>
+        <th scope="col">Posted by</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in data %}
+      <tr>
+        <td class="row">{{ log['date'] }}</td>
+        <td>{{ log['session'] }}</td>
+        <td>{{ log['semester'] }}</td>
+        <td>{{ log['year'] }}</td>
+        <td>{{ log['admin'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock body %}

@@ -5,6 +5,7 @@ class admin:
     def __init__(self):
         firebase = pyrebase.initialize_app(login.CONFIG)
         self.auth = firebase.auth()
+        self.db = firebase.database()
         self.ex = False
 
     def login(self, email, passwd):
@@ -26,5 +27,27 @@ class admin:
             self.ex = False
         finally:
             return self.ex
-            
 
+    def get_log(self):
+        data = self.db.child('log').get().val()
+        new_data = []
+        for date in data:
+            for time in data[date]:
+                dic = {
+                    'admin': data[date][time]['admin'],
+                    'semester': data[date][time]['semester'],
+                    'session': data[date][time]['session'],
+                    'year': data[date][time]['year'],
+                    'date': '{} ({})'.format(date, time),
+                }
+                new_data.append(dic)
+        return new_data
+
+    def post_log(self, data):
+        import datetime
+        dt = datetime.datetime.now()
+        self.db.child('log').child(dt.date()).child(str(dt.hour)+':'+str(dt.minute)+':'+str(dt.second)).set(data)
+
+    def get_last_result(self):
+        data = self.db.child('log').order_by_child('2019-06-26').limit_to_first(1).get().val()
+        print(data)
