@@ -1,5 +1,7 @@
 from db_operation import database, table
 from flask import jsonify
+from adminPanel import admin
+from multiprocessing import Process
 import calculator
 import os
 
@@ -53,7 +55,7 @@ class backend:
         return self.table.create_tables(courseList1, courseList2)
     
 
-    def upload_results(self, filename, semester, year):
+    def upload_results(self, filename, semester, year, user):
         '''This will take result (.txt) file and pass to the student_info and result table'''
 
         file = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'upload'), filename)
@@ -63,8 +65,18 @@ class backend:
             batch = int(session[2:4])-8
             self.db.insert_student(reg_no, name, batch, session)
             self.db.insert_result(reg_no, semester, res, year, session)
-        os.remove(file)
-
+        try:
+            os.remove(file)
+            admin().post_log({'admin': user, 'semester': semester, 'year': year})
+            self.send_mail(semester, year)
+        except Exception:
+            pass
+    
+    def send_mail(self, semester, year):
+        from service import mail
+        email = mail()
+        process = Process(target=email.send, args=(semester, year))
+        process.start()
 
     def generate_API(self, reg_no, semester):
         '''This function will generate a json API for template and requested clients'''
@@ -103,6 +115,6 @@ class backend:
             'cgpa': cgpa,
             'exam year': res[-1],
         }
+        self.db.conn_close()
         return json
-
 

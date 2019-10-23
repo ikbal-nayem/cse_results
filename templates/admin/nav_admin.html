@@ -1,30 +1,30 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ url_for('admin_panel') }}">Home</a>
+    <a class="navbar-brand" href="{{ url_for('admin_panel') }}"><h2>Admin Panel</h2></a>
     <button id="navBar" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li id="upload" class="nav-item">
                 <a class="nav-link" href="{{ url_for('uploadTXT') }}">Upload .txt<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Upload missing</a>
+            <li id="upload-missing" class="nav-item">
+                <a class="nav-link" href="#upload-missing">Upload missing</a>
             </li>
-            <li class="nav-item">
+            <li id="create-tables" class="nav-item">
                 <a class="nav-link" href="{{ url_for('create_tables') }}">Create tables</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Log</a>
+            <li id="log" class="nav-item">
+                <a class="nav-link" href="{{ url_for('log') }}">Log</a>
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
             <div class="nav-item dropdown">
-                <a onclick="drop()" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Action</a>
+                <a onclick="drop()" class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user }}</a>
                 <div id="myDropdown" class="dropdown-menu dropdown-content" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: -60px; transform: translate3d(0px, 45px, 0px);">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Create a admin</a>
+                    <a class="dropdown-item" href="">Action</a>
+                    <a class="dropdown-item" href="{{ url_for('new_admin') }}">Create a admin</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{{ url_for('login') }}">Logout</a>
                 </div>
@@ -32,4 +32,3 @@
         </div>
     </div>  
 </nav>
-    

@@ -1,12 +1,12 @@
 {% extends "admin/layout_admin.html" %}
-{% block navbar %}
-{% include "admin/admin_nav.html" %}
-{% endblock navbar %}
 {% block body %}
-
-{% if name %}
-<h1>{{ name }},</h1>
-{% endif %}
-<h4>Welcome to the admin panel. nice to see you again.</h4>
+<div class="loading">
+    <div class="spinner-grow center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+<h3>Hello {{ user }} !</h3>
+<hr class="my-2">
+<h4>Welcome to the admin panel. nice to see you again. <img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t11/1/32/1f609.png" alt=";)"></h4>
 
 {% endblock %}

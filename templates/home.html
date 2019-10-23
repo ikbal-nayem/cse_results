@@ -1,25 +1,35 @@
 {% extends "layout.html" %}
 {% block body %}
+<div class="loading">
+    <div class="spinner-grow center" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
 <div class="jumbotron">
     <h1 class="display-4">Result</h1>
-    <p>For CSE department Tejgaon college, Dhaka-123</p>
-    <hr class="my-4">
+    <p>For CSE department Tejgaon college, Dhaka-1215</p>
+    <hr class="my-2">
     <p>
         Now you will able to see your result by your <strong>registration number. </strong>
-        You just need to write your full registration number and then 
+        (Previous results also)
+        You just need to write your registration number and then 
         select your semester correctly. <br>
-        <strong>Good luck...</strong>
+        <strong>Good luck... 
+            <img alt=":)" src="https://static.xx.fbcdn.net/images/emoji.php/v9/t6/1/32/1f642.png" style="height: 18px; width: 18px;"></strong>
     </p>
-    <br>
+    <div id="typing">
+        <p data-text="New: {{year}}, {{semester}} semester result has been published.">New: {{year}}, {{semester}} semester result has been published.</p>
+    </div><br>
     <form id="resultInfo" class="form-group" method="post" action="">
-        <div class="form-group input1">
+        <div class="form-group col">
             <label class="form-control-label">Registration no.</label>
             <input id="reg_no" type="text" required placeholder="Registration No..." class="form-control input" name="regiInput" autofocus>
-            <small class="alart">Write your registration number here.</small>
+            <small class="alart">Registration number (e.g: 16502000...)</small>
         </div>
-        <div class="input1">
+        <div class="col">
             <label class="form-control-label">Semester</label>
-            <select class="custom-select" name="select" required>
+            <select id="select" class="custom-select" name="select" required>
                 <option value="">Choose...</option>
                 <option value="1st">1st</option>
                 <option value="2nd">2nd</option>
@@ -32,8 +42,8 @@
             </select>
             <small>Choose a semester</small>
         </div>
-        <em><a class="form-control-lebel" href="{{ url_for('find') }}">Forget registration ?</a></em>
-        <button type="submit" class="btn btn-outline-info btn-lg btn-block">See result</button>
+        <em><a class="form-control-lebel" href="{{ url_for('find') }}">Forgate registration ?</a></em>
+        <button type="submit" class="btn btn-outline-info btn-block">See result</button>
     </form>
 </div>
 {% endblock body %}

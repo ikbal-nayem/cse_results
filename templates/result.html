@@ -3,41 +3,43 @@
 <div class="card border-info mb-3" style="max-width: 100%;">
     <h3 class="card-header card-title">Student information</h3>
     <div class="card-body">
-        <table width="100%" border="0" cellpadding="3" cellspacing="1">
-            <tbody>
-            <tr>
-                <td width="20%" align="left">Name<div class="colon">:</div></td>
-                <td width="40%" align="left">{{ info['name'] }}</td>
-                <td width="20%" align="left">Reg No<div class="colon">:</div></td>
-                <td width="20%" align="left">{{ info['registration'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Batch<div class="colon">:</div></td>
-                <td align="left">{{ info['batch'] }}</td>
-                <td align="left">Session<div class="colon">:</div></td>
-                <td align="left">{{ info['session'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Institute<div class="colon">:</div></td>
-                <td align="left">Tejgaon College, Dhaka-123</td>
-                <td align="left">Semester<div class="colon">:</div></td>
-                <td align="left">{{ info['semester'] }}</td>
-            </tr>
-            <tr>
-                <td align="left">Result<div class="colon">:</div></td>
-            {% if info['result']=='FAILED' %}
-                <td align="left"><strong class="text-warning">{{ info['result'] }}</strong></td>
-            {% else %}
-                <td align="left"><strong id="result" class="text-success">{{ info['result'] }}</strong></td>
-            {% endif %}
-                <td align="left">Exam year<div class="colon">:</div></td>
-                <td align="left">{{ info['exam year'] }}</td>
-            <tr>
-                <td align="left">CGPA<div class="colon">:</div></td>
-                <td align="left"><strong class="text-success">{{ info['cgpa'] }}</strong></td>
-            </tr>
-            </tbody>
-        </table>
+        <dev class="row">
+            <dev class="col">
+                <p>Name <span class="colon">:</span> {{ info['name'] }}</p>
+            </dev>
+            <dev class="col">
+                <p>Reg No. <span class="colon">:</span> {{ info['registration'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Batch <span class="colon">:</span> {{ info['batch'] }}</p>
+            </dev>
+            <dev class="col">
+                <p>session <span class="colon">:</span> {{ info['session'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Institute <span class="colon">:</span> Tejgaon College Dhaka-1215</p>
+            </dev>
+            <dev class="col">
+                <p>Semester <span class="colon">:</span> {{ info['semester'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>Result <span class="colon">:</span> <strong id="result" class="text-success">{{ info['result'] }}</strong></p>
+            </dev>
+            <dev class="col">
+                <p>Exam year <span class="colon">:</span> {{ info['exam year'] }}</p>
+            </dev>
+        </dev>
+        <dev class="row">
+            <dev class="col">
+                <p>CGPA <span class="colon">:</span> {{ info['cgpa'] }}</p>
+            </dev>
+        </dev>
     </div>
 </div>
 <div>
@@ -82,7 +84,34 @@
     </table>
 {% endif %}
 <hr class="my-3">
-    <a href="{{url_for('home')}}" class="card-link"><button type="button" class="btn btn-outline-info btn-block">Go back home</button></a>
+    <div class="btn-group btn-block" role="group" aria-label="Button group with nested">
+        <a href="{{url_for('home')}}" class="btn btn-outline-info">See another</a>
+
+        <button id="btnGroupDrop" class="btn btn-outline-info dropdown-toggle" data-toggle="collapse" data-target="email-collapse" aria-haspopup="true" aria-expanded="false">
+          Next result in Email
+        </button>
+    </div>
+    <div class="collapse" id="email-collapse">
+        <div class="card card-body" id="subscribtion">
+            <p class="card-text">
+                I will send your result truough your email adderss whenever i get it. <br>
+                Note: check your email address twice. You will not get any email if you provide wrong one.
+            </p>
+            <form id="getEmail" action="" method="post">
+                <div class="form-group">
+                    <label for="reg_no">Registration no.</label>
+                    <input id="reg_no" class="form-control form-control-sm" type="text" placeholder="registration" value="{{ info['registration'] }}" required>
+                    <small>Change it if this is not your's.</small>
+                </div>
+                <div class="form-group">
+                    <label for="putEmail">Email address</label>
+                    <input type="email" class="form-control" id="putEmail" placeholder="name@example.com" required>
+                    <small>We'll never share your email with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-outline-info">Submit</button>
+            </form>
+        </div>
+    </div>
 <hr class="my-3">
 </div>
 {% endblock body %}

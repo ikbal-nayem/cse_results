@@ -6,6 +6,45 @@ class database:
 		self.mysql = pymysql.connect(host=db_info.HOST, db=db_info.DATABASE, user=db_info.USER, passwd=db_info.PASSWORD)
 		self.c = self.mysql.cursor()
 	
+	def conn_close(self):
+		self.mysql.commit()
+		self.mysql.close()
+	
+	def add_email(self, reg_no, email):
+		q1 = "select reg_no from student_info where email='{}'".format(email)
+		self.c.execute(q1)
+		if len(self.c.fetchall()) == 0:
+			q2 = "update student_info set email='{}' where reg_no='{}'".format(email, reg_no)
+			self.c.execute(q2)
+			self.conn_close()
+			return True
+		else:
+			self.conn_close()
+			return False
+	
+	def find_email(self, semester, year):
+		q = """select si.reg_no, email 
+			from student_info as si, {}_semester as 3s 
+			where si.reg_no=3s.reg_no and year='{}' 
+			and email is not NULL""".format(semester, year)
+		self.c.execute(q)
+		address = [list(e) for e in self.c.fetchall()]
+		self.conn_close()
+		return address
+
+	def find_name(self, batch):
+		q = "select name from student_info where batch='{}'".format(batch)
+		self.c.execute(q)
+		names = [name[0] for name in self.c.fetchall()]
+		self.mysql.close()
+		return names if len(names)!=0 else False
+
+	def find_regi(self, batch, name):
+		q = "select reg_no from student_info where batch={} and name='{}'".format(batch, name)
+		self.c.execute(q)
+		reg = self.c.fetchall()[0][0]
+		self.mysql.close()
+		return reg
 
 	def show_info(self, reg_no, *argv):
 		'''To select student information'''
@@ -36,12 +75,16 @@ class database:
 		return self.c.fetchall()
 
 	def show_result(self, reg_no, semester, session):
-		code = self.show_courses(semester, session, 'code')
-		codes = [ele[0] for ele in code]
-		q = "select "+','.join(codes)+", year from {}_semester where reg_no='{}'".format(semester, reg_no)
-		self.c.execute(q)
-		res = self.c.fetchall()
-		return res[0] if res else None
+		try:
+			code = self.show_courses(semester, session, 'code')
+			codes = [ele[0] for ele in code]
+			q = "select "+','.join(codes)+", year from {}_semester where reg_no='{}'".format(semester, reg_no)
+			self.c.execute(q)
+			res = self.c.fetchall()
+			return res[0] if res else None
+		except:
+			self.conn_close()
+			return False
 
 
 	def insert_student(self, reg_no, name, batch, session):
@@ -78,7 +121,7 @@ class database:
 		self.c.execute(q)
 		self.mysql.commit()
 
-	
+
 
 class table(database):
 	'''Creating all tables and upload all information into course table'''
@@ -89,7 +132,7 @@ class table(database):
 		try:
 			course1 = 'create table course(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
 			course2 = 'create table course_new(code varchar(10) primary key, subjects varchar(50), credit float, semester varchar(4))'
-			student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(40), batch int(2), session varchar(7))'
+			student_info = 'create table student_info(reg_no varchar(12) primary key, name varchar(50), batch int(2), session varchar(10))'
 			self.c.execute(course1)
 			self.c.execute(course2)
 			print('course table ready..')

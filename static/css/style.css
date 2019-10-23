@@ -1,5 +1,5 @@
 .navbar-brand h2{
-    margin: 0 50px 0 10px;
+    margin: 0 100px 0 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     letter-spacing: -5px;
     text-shadow: -3px 5px 10px rgb(0, 0, 0);
@@ -24,9 +24,7 @@
     color: rgb(74, 173, 240);
     text-align: center;
 }.colon{
-    float: right;
-    overflow: hidden;
-    color: #a8f551;
+    color: #90fc02;
 }.table td, .table th{
     padding: 5px;
 }.hidden-msg{
@@ -42,9 +40,42 @@
 }.show {
     visibility: visible;
     display: block;
+}.autocomplete{
+    background: rgb(204, 247, 236);
+    color: black;
+    font-size: initial;
+    border-radius: 5px;
+    font-family: initial;
 }
 
-.subject-input-1{
-    width: 50%;
-    margin-right: 5px;
-  }
+
+
+
+
+#typing{
+    display: block;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+#typing > p{
+	font-family: cursive;
+	position: absolute;
+	overflow: hidden;
+    color: transparent;
+}
+#typing > p:before{
+	content: attr(data-text);
+	position: absolute;
+	color: rgb(200, 253, 76);
+	overflow: hidden;
+	border-right: 1px solid red;
+	white-space: nowrap;
+	animation: typing 10s steps(25) infinite;
+}
+@keyframes typing{
+	0%{width: 0;}
+	40%{width: 100%;}
+	80%{width: 100%;}
+	90%{width: 0;}
+    100%{width: 0;}
+}

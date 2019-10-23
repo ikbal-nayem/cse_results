@@ -1,24 +1,20 @@
 {% extends "layout.html" %}
-{% block navbar %}
-{% include "includes/_navbar.html" %}
-{% endblock navbar %}
 {% block body %}
-<form id="loginForm" class="login" action="{{ url_for('login') }}" method="POST" style="margin:auto; width:55%"><br>
+<form id="loginForm" class="login" action="{{ url_for('login') }}" method="POST" style="margin:auto; max-width: 60%;"><br>
   <fieldset>
     <legend><h2>Admin Login</h2></legend>
     <hr class="my-2">
     <div class="form-group">
-      <label for="exampleInputEmail1">Email address *</label>
+      <label for="exampleInputEmail1">Email address <b>*</b></label>
       <input type="email" id="loginEmail" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" name="email" autofocus>
-      <small id="invalidEmail"></small>
+      <small id="invalidEmail" class="error-alert hidden-msg"></small>
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password *</label>
+      <label for="exampleInputPassword1">Password <b>*</b></label>
       <input type="password" id="loginPasswd" class="form-control" placeholder="Password" name="passwd">
-      <small id="invalidPasswd"></small>
+      <small id="invalidPasswd" class="error-alert hidden-msg"></small>
     </div>
-    <button type="submit" id="login" class="btn btn-primary btn-block">Login</button>
+    <button type="submit" id="login-btn" class="btn btn-primary btn-block"><span id="checking"></span> Login</button>
   </fieldset>
 </form>
-
 {% endblock body %}

@@ -1,7 +1,4 @@
 {% extends "admin/layout_admin.html" %}
-{% block navbar %}
-{% include "admin/admin_nav.html" %}
-{% endblock navbar %}
 {% block body %}
 <div class="card text-white bg-dark mb-4" style="max-width: 100%;">
     <h2 class="card-header">Upload a result sheet</h2>
@@ -14,7 +11,7 @@
             <strong>Note: Be carefull about every field. You will not be abale to undo this step.</strong>
         </p>
         <hr>
-        <form id="uploadReslt" action="" method="POST" enctype="multipart/form-data">
+        <form id="uploadReslt" action="" method="" enctype="multipart/form-data" submitted="true">
             <fieldset>
                 <div class="form-group">
                     <div class="form-group input1">
@@ -59,7 +56,7 @@
                 <hr>
             </div>
             <p id="msg" class="success"></p>
-            <button type="submit" id="btn" class="btn btn-warning btn-block">Upload now</button>
+            <button type="submit" id="upload_btn" class="btn btn-warning btn-block">Upload now</button>
             <i id="btnHelp"><small>Please check twice before clicking the button</small></i>
         </form>
     </div>
