@@ -34,6 +34,51 @@ window.onclick = function(e) {
     }
 }
 
+//                                   Alert Box close
+
+$(document).ready(function(){
+    $('button.close').on('click', function(){
+        $(this).parent().remove()
+    })
+})
+
+//                                    update from NU
+
+$(document).ready(()=>{
+    $('#updateResults').on('submit', function(event){
+        $('#update-btn').addClass('disabled').html('<span id="updating"></span> Updating...')
+        $('#updating').addClass('spinner-border spinner-border-sm')
+        $('#alert').addClass('hidden-msg')
+        if($(this).attr('success')){
+            return true
+        }else{
+            event.preventDefault()
+            $.ajax({
+                url: '/admin/update-db',
+                type: 'POST',
+                data: {
+                    'batch': $('#batch').val(),
+                    'semester': $('#semester').val(),
+                    'xm-code': $('#xm-code').val(),
+                    'xm-year': $('#xm-year').val(),
+                },
+                success: resp =>{
+                    if (resp === 'updated'){
+                        $('#tableCreated').text('Result successfully updated!').parent().removeClass('hidden-msg alert-warning').addClass('alert-success')
+                    }else if (resp === 'registration_error'){
+                        $('#tableCreated').text('No registration number found for this batch!').parent().removeClass('hidden-msg alert-success').addClass('alert-warning')
+                    }else if(resp === 'xm_code_error'){
+                        $('#tableCreated').text('Exam code or year error!').parent().removeClass('hidden-msg alert-success').addClass('alert-warning')
+                    }else{
+                        $('#tableCreated').text('Updating failed!').parent().removeClass('hidden-msg alert-success').addClass('alert-warning')
+                    }
+                    $('#update-btn').removeClass('disabled').html('Update now')
+                }
+            })
+        }
+    })
+})
+
 //                                      create table
 
 $(document).ready(function(){

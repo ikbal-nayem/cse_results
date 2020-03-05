@@ -1,4 +1,5 @@
 from db_operation import database, table
+from scrap_nu import grab
 from flask import jsonify
 from adminPanel import admin
 from multiprocessing import Process
@@ -71,6 +72,33 @@ class backend:
             self.send_mail(semester, year)
         except Exception:
             pass
+
+    def scrap_results(self, batch, semester, xm_code, year, user):
+        reg_list = self.db.find_regi(batch)
+        if not reg_list:
+            return "registration_error"
+        xm_code_error = True
+        for reg in reg_list:
+            try:
+                res = grab(reg, xm_code, year)
+            except:
+                return 'connection_failed'
+            c_code = []
+            grade = []
+            if res['result']:
+                xm_code_error = False
+                for sub in res['result']:
+                    c_code.append(sub)
+                    grade.append(res['result'][sub]['grade'])
+                self.db.insertByScrapping(semester, reg, year, c_code, grade)
+        self.db.conn_close()
+        if xm_code_error:
+            return 'xm_code_error'
+        else:
+            admin().post_log({'admin': user, 'semester': semester, 'year': year})
+            return "updated"
+        
+
     
     def send_mail(self, semester, year):
         from service import mail
@@ -118,3 +146,6 @@ class backend:
         self.db.conn_close()
         return json
 
+
+
+# backend().scrap_results(8, '4th', '5614', '2018')

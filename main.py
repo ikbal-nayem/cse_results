@@ -84,7 +84,7 @@ def admin_panel():
     if 'user' in session: 
         return render_template('admin/adminHome.html', title='Admin', user=session['user'])
     else: 
-        return redirect('login')  
+        return redirect(url_for('login'))  
 
 @app.route('/new-admin/', methods=['POST', 'GET'])
 def new_admin():
@@ -112,8 +112,20 @@ def uploadTXT():
             return jsonify({"success":True})
         return render_template('admin/upload.html', title='Admin-Upload', user=session['user'])
     else:
-        return redirect('login')
+        return redirect(url_for('login'))
 
+
+@app.route('/admin/update-db', methods=['GET', 'POST'])
+def updateFromNU():
+    if 'user' in session:
+        if request.method == 'POST':
+            batch = request.form['batch']
+            semester = request.form['semester']
+            xm_code = request.form['xm-code']
+            xm_year = request.form['xm-year']
+            return backend().scrap_results(batch, semester, xm_code, xm_year, session['user'])
+        return render_template('admin/updateFromNU.html', title='Update result', user=session['user'])
+    return redirect(url_for('login'))
 
 @app.route('/admin/create-tables', methods=['POST', 'GET'])
 def create_tables():
@@ -121,7 +133,7 @@ def create_tables():
         if request.method == "POST":
             backend().create_tables_in_database()
         return render_template('admin/create_table.html', title='Admin- Create-tables', user=session['user'])
-    return redirect('login')
+    return redirect(url_for('login'))
 
 @app.route('/admin/log')
 def log():
